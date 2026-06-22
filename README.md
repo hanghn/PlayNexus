@@ -1,3 +1,9 @@
+# PlayNexus
+
+A team project built by **Liam Foley**, **Hansen Cao**, **Silu Wang**, and
+**Hang Hang**. All four members contributed to the design, implementation, and
+testing.
+
 ## Getting Started
 
 Run `npm install` in the root directory to install all dependencies for the
