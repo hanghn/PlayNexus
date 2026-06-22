@@ -18,7 +18,7 @@ To run gamenite locally in development mode, do one of the following:
      `npm run dev`
 
 The second terminal window, the one in the `client` directory, shows a URL
-that you should go to to preview the application, probably
+that you should go to to preview the application on 
 <http://localhost:4530/>. You can use the default username/password
 combinations user0/pwd0000, user1/pwd1111, user2/pwd2222, and user3/pwd3333 to
 log in.
