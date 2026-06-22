@@ -103,8 +103,7 @@ function FriendCard({
   const [removing, setRemoving] = useState(false);
 
   const handleRemove = async () => {
-    if (!window.confirm(`Unfriend ${other.display}? This also disables your DMs.`))
-      return;
+    if (!window.confirm(`Unfriend ${other.display}? This also disables your DMs.`)) return;
     setRemoving(true);
     try {
       await onRemove(friendship.friendshipId);
