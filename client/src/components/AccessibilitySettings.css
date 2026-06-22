@@ -1,0 +1,105 @@
+/* Accessibility settings — Discord-style "Audio & Screen Reader" panel */
+.a11y {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.a11y-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--cream);
+}
+
+.a11y-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.a11y-row-label {
+  font-weight: 800;
+  color: var(--text-1);
+}
+
+.a11y-row-desc {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+
+/* Slider header: Slower — value — Faster */
+.a11y-slider-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.8rem;
+  color: var(--text-2);
+  margin-top: 0.3rem;
+}
+
+.a11y-value {
+  font-weight: 800;
+  color: var(--teal);
+}
+
+.a11y input[type="range"] {
+  width: 100%;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.a11y-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Toggle rows */
+.a11y-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-1);
+}
+
+.a11y-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+/* Switch */
+.a11y-switch {
+  flex-shrink: 0;
+  position: relative;
+  width: 3rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: #46506b;
+  transition: background 0.15s ease;
+}
+.a11y-switch.is-on {
+  background: var(--teal-dark);
+}
+.a11y-knob {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s ease;
+}
+.a11y-switch.is-on .a11y-knob {
+  transform: translateX(1.4rem);
+}
+.a11y-switch:focus-visible {
+  outline: 3px solid var(--blue-soft);
+  outline-offset: 2px;
+}

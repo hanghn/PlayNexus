@@ -1,0 +1,69 @@
+/* Stacked toasts for incoming DMs / friend requests (bottom-left so they don't
+   collide with the game-invite toasts). */
+.social-toast-stack {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: min(22rem, calc(100vw - 2rem));
+}
+
+.social-toast {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-left: 3px solid var(--blue);
+  border-radius: 0.7rem;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  animation: social-toast-in 0.18s ease both;
+}
+
+@keyframes social-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.social-toast-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-align: left;
+  border: none;
+  background: none;
+  color: var(--text-1);
+  padding: 0.7rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.social-toast-main:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.social-toast-icon {
+  font-size: 1.1rem;
+}
+
+.social-toast-x {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  color: var(--text-2);
+  padding: 0 0.7rem;
+  font-size: 0.9rem;
+}
+.social-toast-x:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}

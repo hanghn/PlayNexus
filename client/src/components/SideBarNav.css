@@ -1,0 +1,118 @@
+.sideBarNav {
+  padding-inline: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.55rem;
+  padding-block: 1rem;
+  background-color: #1b2a4a;
+  border-right: 1px solid #1c2740;
+  grid-area: sidebar;
+}
+
+/* Collapse toggle pinned at the top of the rail. Sized large with a strong
+   teal outline so it's easy to see and hit (accessibility). */
+.sideBarToggle {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid var(--teal);
+  border-radius: 0.6rem;
+  background: #16233d;
+  color: #eaf6f2;
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sideBarToggle:hover {
+  background: var(--teal);
+  color: #08231d;
+}
+
+.sideBarToggle:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.sideBarNav--collapsed {
+  padding-inline: 0.45rem;
+  align-items: center;
+}
+
+.sideBarNav--collapsed .sideBarToggle {
+  align-self: center;
+}
+
+.menu_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3rem;
+  width: 100%;
+  border-radius: 0.6rem;
+  color: #c9d4e8;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.menu_button:hover {
+  background: #21314f;
+  color: #ffffff;
+}
+
+.menu_selected,
+.menu_selected:hover {
+  background: var(--teal);
+  color: #08231d;
+}
+
+/* Unread message count badge on the Messages nav item. */
+.nav-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  margin-left: 0.45rem;
+  border-radius: 999px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  vertical-align: middle;
+}
+
+/* Mobile: the rail becomes a horizontal, scrollable nav strip under the header. */
+@media (max-width: 680px) {
+  .sideBarNav,
+  .sideBarNav--collapsed {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid #1c2740;
+  }
+  /* the collapse toggle is desktop-only */
+  .sideBarToggle {
+    display: none;
+  }
+  .menu_button {
+    width: auto;
+    flex-shrink: 0;
+    min-height: 2.5rem;
+    padding-inline: 0.9rem;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+}

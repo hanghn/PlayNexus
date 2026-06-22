@@ -1,0 +1,437 @@
+/* Styles used across the site */
+
+/** Core fonts **/
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --gray-background: #f7f7f7;
+  --gray-foreground: #555;
+
+  /* PlayNexus brand palette (extracted from the logo: green, red, blue). */
+  --navy: #1b2a4a;
+  --navy-deep: #14203a;
+  --teal: #7cc4b4; /* green family */
+  --teal-dark: #3f9482;
+  --teal-bright: #2fb89e;
+  --coral: #e8584e; /* red family */
+  --coral-dark: #c8402f;
+  --coral-soft: #ff7a70;
+  --blue: #3f8cff; /* blue family */
+  --blue-dark: #2f6fd6;
+  --blue-soft: #6aa6ff;
+  --cream: #f4f1e0;
+
+  /* Dark app surfaces (used across the lobby, games, and the social pages). */
+  --surface-0: #0e1830; /* deepest page backdrop */
+  --surface-1: #16233d; /* raised panels / cards */
+  --surface-2: #1f3050; /* hover / nested */
+  --border-1: #2e4068;
+  --text-1: #eaf0fb; /* primary text on dark */
+  --text-2: #9fb0cc; /* muted text on dark */
+
+  --page-bg: #f6f4ec;
+}
+
+body {
+  /* Dark app shell — keeps route transitions from flashing a light background
+     under the dark pages (lobby, games, friends, messages, profile). */
+  background-color: var(--surface-0);
+}
+
+/* Visible keyboard-focus indicator across the whole app, so every interactive
+   element is reachable and clearly highlighted when navigating by keyboard. */
+:focus-visible {
+  outline: 2px solid var(--blue-soft);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ===== Accessibility preferences (set on <html> by AccessibilityProvider) ===== */
+
+/* Reduce motion: neutralize animations/transitions for users who opt in (also
+   respects the OS-level prefers-reduced-motion setting). */
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+/* Also cancel the hover "lift"/slide transforms so motion is clearly removed,
+   not just made instant. (Targeted hover effects across the app.) */
+[data-reduce-motion="true"] .fr-card:hover,
+[data-reduce-motion="true"] .accentBtn:hover,
+[data-reduce-motion="true"] .fr-btn:hover,
+[data-reduce-motion="true"] .composer-send:hover,
+[data-reduce-motion="true"] .games-card:hover,
+[data-reduce-motion="true"] .chatActions {
+  transform: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* High contrast: a distinct near-black theme — pure-white text + flattened
+   backgrounds across EVERY surface (chrome, pages, games, forum), white outlines
+   on panels and form controls. Accent-carrying elements (banner, swatches, color
+   picker, avatars, the brand logo) are deliberately preserved so the user's
+   color choices still read.
+   NOTE: tokens are declared on the universal selector `*`, so each element
+   redefines them locally — we re-declare on `[data-contrast="high"] *` to win. */
+[data-contrast="high"],
+[data-contrast="high"] * {
+  --surface-0: #000000;
+  --surface-1: #000000;
+  --surface-2: #141414;
+  --border-1: #ffffff;
+  --text-1: #ffffff;
+  --text-2: #ffffff;
+  --cream: #ffffff;
+  --navy: #000000;
+  --navy-deep: #000000;
+}
+
+/* Flatten every page / chrome / game / forum background to solid black. */
+[data-contrast="high"] body,
+[data-contrast="high"] .right_main,
+[data-contrast="high"] .header,
+[data-contrast="high"] .sideBarNav,
+[data-contrast="high"] .lobby,
+[data-contrast="high"] .games-page,
+[data-contrast="high"] .games-hero,
+[data-contrast="high"] .forum-page,
+[data-contrast="high"] .forum-hero,
+[data-contrast="high"] .thread-row,
+[data-contrast="high"] .thread-hero,
+[data-contrast="high"] .pf-page,
+[data-contrast="high"] .pf-hero,
+[data-contrast="high"] .fr-page,
+[data-contrast="high"] .fr-hero,
+[data-contrast="high"] .dm-page,
+[data-contrast="high"] .content,
+[data-contrast="high"] .gameContainer,
+[data-contrast="high"] .gameTools,
+[data-contrast="high"] .crib-content {
+  background: #000000 !important;
+  background-image: none !important;
+}
+
+/* Header / sidebar / game toolbar get a white divider so they read as chrome. */
+[data-contrast="high"] .header {
+  border-bottom: 2px solid #ffffff;
+}
+[data-contrast="high"] .sideBarNav {
+  border-right: 2px solid #ffffff;
+}
+[data-contrast="high"] .gameTools {
+  border-bottom: 2px solid #ffffff;
+}
+
+/* Panels/cards + form controls get a visible white outline. Form fields also go
+   black-on-white-text. (No blanket `button` rule — that framed the logo and
+   wiped the swatch colors.) */
+[data-contrast="high"] .pf-card,
+[data-contrast="high"] .pf-stat,
+[data-contrast="high"] .fr-card,
+[data-contrast="high"] .dm-inbox,
+[data-contrast="high"] .redditBox,
+[data-contrast="high"] .games-card,
+[data-contrast="high"] input:not(.pf-color-input),
+[data-contrast="high"] textarea,
+[data-contrast="high"] select {
+  border: 2px solid #ffffff !important;
+}
+[data-contrast="high"] input:not(.pf-color-input),
+[data-contrast="high"] textarea,
+[data-contrast="high"] select {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* All page hero banners share ONE look in high contrast (the Friends hero is the
+   template): black fill, a 1px white outline, same rounded corners. */
+[data-contrast="high"] .fr-hero,
+[data-contrast="high"] .forum-hero,
+[data-contrast="high"] .games-hero,
+[data-contrast="high"] .thread-hero,
+[data-contrast="high"] .pf-hero {
+  background: #000000 !important;
+  background-image: none !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 1rem !important;
+}
+
+/* Links: bright, NO underline (per request). */
+[data-contrast="high"] a {
+  color: #ffe066 !important;
+  text-decoration: none !important;
+}
+
+/* Sidebar nav: plain white text (not yellow), and show the SELECTED item with a
+   white outline on black instead of the green fill — yellow-on-green was unreadable. */
+[data-contrast="high"] .menu_button {
+  color: #ffffff !important;
+  background: #000000 !important;
+}
+[data-contrast="high"] .menu_selected {
+  border: 2px solid #ffffff !important;
+}
+
+/* The brand/logo button must NOT be framed in high contrast. */
+[data-contrast="high"] .brand {
+  border: 0 !important;
+  background: transparent !important;
+}
+
+/* Thick, obvious focus ring. */
+[data-contrast="high"] :focus-visible {
+  outline: 3px solid #ffd166 !important;
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--navy);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a {
+  color: var(--teal-dark);
+}
+
+/** Buttons **/
+button {
+  cursor: pointer;
+}
+
+button.widefill {
+  color: var(--cream);
+  background-color: var(--navy);
+  border-radius: 0.5rem;
+  width: 100%;
+  border: none;
+  font-weight: 600;
+  min-height: 2.5rem;
+}
+
+button.narrowcenter {
+  border-radius: 0.5rem;
+  padding-inline: 1rem;
+  margin-inline: auto;
+  border: none;
+  font-weight: 600;
+  min-height: 2.5rem;
+}
+
+button.narrow {
+  border-radius: 0.5rem;
+  padding-inline: 1rem;
+  border: none;
+  font-weight: 600;
+  min-height: 2.5rem;
+}
+
+button.primary {
+  color: var(--cream);
+  background-color: var(--navy);
+}
+
+button.primary:hover {
+  background-color: var(--navy-deep);
+}
+
+button.secondary {
+  color: var(--navy);
+  background-color: var(--teal);
+}
+
+button.secondary:hover {
+  color: var(--cream);
+  background-color: var(--teal-dark);
+}
+
+button.secondary:disabled {
+  background-color: oklch(0.75 0 0);
+  color: oklch(0.9 0 0);
+}
+
+/** Input fields **/
+textarea {
+  resize: block;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--gray-foreground);
+  min-height: 2.5rem;
+}
+
+input.widefill,
+textarea.widefill {
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-foreground);
+  width: 100%;
+  min-height: 2.5rem;
+  padding-inline: 0.5rem;
+}
+
+/** Other UI defaults **/
+hr {
+  border: 0;
+  border-top: 1px dashed black;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/** Error reporting **/
+.error-message {
+  color: var(--coral);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Reusable accent chips/buttons in the brand palette (green / blue / red). */
+.accentBtn {
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.55rem 1.1rem;
+  font-weight: 700;
+  min-height: 2.5rem;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    filter 0.15s ease;
+}
+.accentBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+.accentBtn--green {
+  background: var(--teal);
+  color: #08231d;
+}
+.accentBtn--blue {
+  background: var(--blue);
+  color: #04122e;
+}
+.accentBtn--red {
+  background: var(--coral);
+  color: #2a0b08;
+}
+
+/** Default content settings **/
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  /* sits on the dark app shell — default to light text so nothing is invisible */
+  color: var(--text-1);
+}
+
+/* `.content` pages sit on the dark app shell, so their default navy headings
+   and gray labels were unreadable. Give them light, on-theme text and dark
+   form controls instead. */
+.content h1,
+.content h2,
+.content h3 {
+  color: var(--cream);
+}
+.content .smallAndGray {
+  color: var(--text-2);
+}
+.content label,
+.content p {
+  color: var(--text-1);
+}
+.content a {
+  color: var(--blue-soft);
+}
+.content input,
+.content textarea,
+.content input.widefill,
+.content textarea.widefill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-1);
+  color: var(--text-1);
+}
+.content input::placeholder,
+.content textarea::placeholder {
+  color: var(--text-2);
+}
+
+.spacedSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tightSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/** Functional classes **/
+.centered {
+  text-align: center;
+}
+
+.visuallyHidden {
+  display: inline-block;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+.dottedListItem {
+  display: flex;
+  flex-direction: row;
+  border-top: #000000 1px dashed;
+}
+
+.dottedList {
+  border-bottom: #000000 1px dashed;
+}
+
+.notTooWide {
+  max-width: 600px;
+}
+
+.smallAndGray {
+  font-size: 0.75rem;
+  color: var(--gray-foreground);
+}
+
+/* App-level loading placeholder (shown while the session cookie is checked).
+   Uses the light on-dark text token so it meets WCAG AA contrast. */
+.app-loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.app-loading h1 {
+  color: var(--text-1);
+}

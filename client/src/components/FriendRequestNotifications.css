@@ -1,0 +1,115 @@
+/* The friend-request window: a full-width elevated window box across the top
+   of the lobby. */
+.friend-request-container {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #26395f 0%, #1c2b49 100%);
+  border: 1px solid #3a577f;
+  border-radius: 0.9rem;
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 0.5rem;
+  color: #eef2f9;
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 196, 180, 0.1);
+}
+
+.friend-request-container h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.85rem;
+  color: #f4f1e0;
+  font-size: 1.05rem;
+}
+
+/* pulsing dot to signal "new" */
+.friend-request-container h3::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+  animation: friendPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes friendPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.friend-request-empty {
+  margin: 0;
+  color: #9fb0cc;
+  font-size: 0.9rem;
+}
+
+.friend-request-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friend-request-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #34507e;
+  border-radius: 0.55rem;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.friend-request-item:last-child {
+  margin-bottom: 0;
+}
+
+.friend-request-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.friend-request-sender {
+  color: #f4f1e0;
+}
+
+.friend-request-time {
+  font-size: 0.85rem;
+  color: #9fb0cc;
+}
+
+.friend-request-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.friend-request-actions button {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .friend-request-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .friend-request-actions {
+    width: 100%;
+  }
+
+  .friend-request-actions button {
+    flex: 1;
+  }
+}

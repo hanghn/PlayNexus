@@ -1,0 +1,104 @@
+.game-row {
+  width: 100%;
+}
+
+.game-row-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.8rem;
+  background: #18253f;
+  border: 1px solid #29395c;
+  text-decoration: none;
+  color: #eaf0fb;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease,
+    transform 0.12s ease;
+}
+
+.game-row-link:hover {
+  background: #1f3050;
+  border-color: var(--teal);
+  transform: translateX(2px);
+}
+
+.game-row-link:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.game-row-thumb {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.game-row-art {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+.game-row-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.game-row-title {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.game-row-meta {
+  color: #9fb0cc;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.game-row-right {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+.game-row-players {
+  color: #cbd5e8;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.game-row-pill {
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.game-row-pill--waiting {
+  background: #2a3b5c;
+  color: #cbd5e8;
+}
+
+.game-row-pill--active {
+  background: #7cc4b4;
+  color: #07241d;
+}
+
+.game-row-pill--done {
+  background: #3a4a5e;
+  color: #aebfd6;
+}

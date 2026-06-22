@@ -1,0 +1,1171 @@
+/* The green felt fills the entire window below the header — the board IS the
+   play area, no dark surround. */
+.crib-content {
+  position: relative;
+  background: var(--crib-felt, #1f7a3d);
+  color: #eef3ee;
+  border-radius: 0;
+  /* Fit the window exactly and lay out as a column, so the board shrinks to fit
+     instead of the page scrolling — the action bar is always visible. */
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  /* Become a size container so cards scale with the ACTUAL play area, not the
+     whole viewport — otherwise, when not full-screen, the cards stay too tall
+     and the bottom hand overlaps the centre pile. */
+  container-type: size;
+  /* Size by the SMALLER of available height and width, so on a narrow window the
+     cards shrink enough to keep all 6 in a single row — otherwise the hand wraps
+     to two rows, the board gets too tall, and the deck overlaps the hand. */
+  /* Height drives the size on a big window (so it fills the space); width caps it
+     on a narrow/minimized window (so the centre row and starter never get cut
+     off). min() = the more constraining of the two. */
+  --card-h: clamp(2.4rem, min(16cqh, 8.5cqw), 8rem);
+  --card-w: calc(var(--card-h) * 5 / 7);
+}
+
+.crib-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  padding-bottom: 0.1rem;
+}
+
+/* Peg-board scoreboard, one track per player */
+.crib-scoreboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+}
+
+.crib-track-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #f3f7f3;
+  font-size: 0.82rem;
+}
+
+.crib-peg-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
+}
+
+.crib-peg--you {
+  background: #3b82f6;
+}
+
+.crib-peg--opp {
+  background: #ef4444;
+}
+
+.crib-track-name {
+  font-weight: 700;
+  min-width: 4.5rem;
+}
+
+.crib-score-num {
+  font-weight: 800;
+}
+
+.crib-crib-marker {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #07241d;
+  background: #fef3c7;
+  border-radius: 999px;
+  padding: 0.05rem 0.4rem;
+}
+
+/* Real-time scoring callouts — anchored over whatever region scored (the hand,
+   the pegging pile, the crib, the starter). */
+.crib-row-wrap {
+  position: relative;
+}
+
+.crib-anchor {
+  position: relative;
+}
+
+.crib-toast-anchor {
+  position: absolute;
+  /* Sit centered just ABOVE the scoring cards. Centering horizontally means the
+     callout can never be clipped off the left/right edge on a narrow window
+     (the old left-offset version overflowed when the hand sat near the edge). */
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, -0.4rem);
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* The top (opponent) seat sits near the window edge, so a callout above it would
+   clip. Drop it BELOW that hand instead — into the open felt. */
+.crib-seat--top .crib-toast-anchor {
+  top: 100%;
+  bottom: auto;
+  transform: translate(-50%, 0.4rem);
+}
+
+.crib-toast {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 1.2rem;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  animation: crib-toast-pop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.35) both;
+}
+
+.crib-toast--you {
+  background: #2563eb;
+}
+
+.crib-toast--opp {
+  background: #e8584e;
+}
+
+.crib-toast-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.crib-toast-num {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0.05rem 0;
+}
+
+.crib-toast-unit {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@keyframes crib-toast-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  70% {
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Corner-bracket crib drop zone */
+.crib-dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 9rem;
+  height: 6rem;
+  padding: 0.5rem;
+  color: #fff;
+  text-align: center;
+}
+
+.crib-dropzone-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.crib-dropzone-sub {
+  font-size: 0.82rem;
+  opacity: 0.85;
+}
+
+/* The four L-shaped corner marks */
+.crib-corner-mark {
+  position: absolute;
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+}
+
+.crib-corner-mark--tl {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.crib-corner-mark--tr {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+.crib-corner-mark--bl {
+  bottom: 0;
+  left: 0;
+  border-right: none;
+  border-top: none;
+}
+
+.crib-corner-mark--br {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+/* Crib zone: a compact stacked pile / empty slot showing where the crib is */
+.crib-pile {
+  position: relative;
+  width: 3rem;
+  height: 4.2rem;
+}
+
+.crib-pile .crib-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 4.2rem;
+}
+
+.crib-pile .crib-card:nth-child(2) {
+  transform: translate(3px, 3px);
+}
+
+.crib-pile .crib-card:nth-child(3) {
+  transform: translate(6px, 6px);
+}
+
+.crib-pile .crib-card:nth-child(4) {
+  transform: translate(9px, 9px);
+}
+
+.crib-slot-empty {
+  width: 3rem;
+  height: 4.2rem;
+  border: 2px dashed rgba(255, 255, 255, 0.55);
+  border-radius: 8px;
+}
+
+/* Step-by-step guidance bar pinned to the bottom of the window */
+.crib-guidance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  /* Never let the action bar be compressed or pushed off-screen */
+  flex-shrink: 0;
+}
+
+.crib-guidance-text {
+  margin: 0;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e8edf5;
+}
+
+.crib-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* Every in-game button shares one look, matched to the score legend box:
+   a white panel with a bold dark border and black text. */
+.crib-actions button.primary,
+.crib-result-card button.primary {
+  background: #fff;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 0.55rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.crib-actions button.primary:hover:not(:disabled),
+.crib-result-card button.primary:hover:not(:disabled) {
+  background: #f4f1e0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.crib-actions button.primary:disabled,
+.crib-result-card button.primary:disabled {
+  background: #e2e2e2;
+  color: #9a9a9a;
+  border-color: #9a9a9a;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.crib-content h2,
+.crib-content h3 {
+  color: #f4f1e0;
+}
+
+/* Hints / small print stay readable on the dark surface */
+.crib-content .smallAndGray {
+  color: #9fb0cc;
+}
+
+/* Settings button — labelled so it's instantly recognizable */
+.crib-settings-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  min-height: 1.85rem;
+  border-radius: 999px;
+  background: #f4f1e0;
+  color: #1b2a4a;
+  border: 2px solid #cdd9ec;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.crib-settings-btn:hover {
+  background: #fff;
+}
+
+.crib-settings-btn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.crib-settings-panel {
+  position: absolute;
+  top: 2.8rem;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  background: #16233d;
+  border: 1px solid #2e4068;
+  border-radius: 10px;
+  padding: 0.8rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.crib-settings-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #eaf0fb;
+  margin-bottom: 0.35rem;
+}
+
+.crib-swatch-row {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.crib-swatch {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+}
+
+.crib-swatch.is-selected {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px var(--teal);
+}
+
+/* Phase badge next to the title */
+.crib-phase-chip {
+  background: #223152;
+  color: #cdd9ec;
+  border: 1px solid #2e4068;
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* The table fills the width; the score display sits in a slim right column.
+   By default (windowed / minimized) that's two slim vertical progress bars —
+   minimal space. Only in full screen does the full wooden peg board appear. */
+.crib-play-area {
+  --crib-board-col: clamp(13rem, 24vw, 19rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5.8rem;
+  flex: 1 1 0;
+  min-height: 0;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.crib-play-area::before {
+  display: none;
+}
+
+/* Labelled You / opponent score bars (default, windowed) — stand in for the
+   full peg board, with a name + score above each track so it's clear who's who. */
+.crib-mini-progress {
+  display: flex;
+  gap: 0.5rem;
+  height: 100%;
+  justify-content: center;
+}
+
+.crib-mini-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.crib-mini-cap {
+  white-space: nowrap;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.crib-mini-cap--you {
+  /* Light enough to clear WCAG AA contrast against the felt and its text-shadow. */
+  color: #cfe0ff;
+}
+
+/* Only a long human opponent name can overflow — clip that one with an ellipsis.
+   "You" / "AI" are short and stay fully visible. */
+.crib-mini-cap--opp {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Light enough to clear WCAG AA contrast against the felt and its text-shadow. */
+  color: #ffb7b1;
+}
+
+.crib-mini-score {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.crib-mini-track {
+  position: relative;
+  flex: 1;
+  width: 0.95rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+
+.crib-mini-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transition: height 0.4s ease;
+}
+
+.crib-mini-fill--you {
+  background: linear-gradient(180deg, #60a5fa, #3b82f6);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.85);
+}
+
+.crib-mini-fill--opp {
+  background: linear-gradient(180deg, #f87171, #ef4444);
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.85);
+}
+
+/* Full screen: swap the slim bars for the full peg board on the right. */
+.gameMaximized .crib-play-area {
+  grid-template-columns: minmax(0, 1fr) var(--crib-board-col);
+}
+.gameMaximized .crib-mini-progress {
+  display: none;
+}
+.gameMaximized .crib-pegboard {
+  display: flex;
+}
+
+/* The wooden peg board panel on the right (full screen only; the slim progress
+   bars stand in otherwise — `.gameMaximized .crib-pegboard` re-enables it). */
+.crib-pegboard {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  min-height: 0;
+  width: 100%;
+  /* Span the full table height: the board top lines up with the opponent's cards
+     and the score legend sits down by the "You" row. (Settings now lives in the
+     top bar, so there's nothing to drop below here.) */
+  margin-top: 0;
+  margin-right: -0.75rem;
+}
+
+.crib-pegboard svg {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+}
+
+.crib-pegboard-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  /* A bit more than half the panel width, under the board on the right (never
+     narrower than its content). */
+  width: 62%;
+  min-width: fit-content;
+  max-width: 100%;
+  align-self: flex-end;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 4px;
+  padding: 0.25rem 0.55rem;
+}
+
+.crib-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+}
+
+.crib-legend-swatch {
+  width: 1.3rem;
+  height: 1.3rem;
+  border: 2px solid #1a1a1a;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.crib-legend-name {
+  font-weight: 700;
+  flex: 1;
+}
+
+.crib-legend-score {
+  font-weight: 800;
+}
+
+/* The "/ 121" goal suffix is muted and lighter so the live score stands out. */
+.crib-legend-goal {
+  font-weight: 600;
+  opacity: 0.55;
+  font-size: 0.85em;
+}
+
+.crib-table {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Spread the three rows (opponent / centre / your hand) across the full height
+     so the board uses the top and bottom of the window. The centre row no longer
+     wraps, so the rows keep a guaranteed minimum gap and never overlap. */
+  justify-content: space-between;
+  gap: clamp(0.6rem, 2cqh, 1.4rem);
+  width: 100%;
+  flex: 1 1 0;
+  min-height: 0;
+  padding: 0.4rem 0.25rem;
+  overflow: hidden;
+}
+
+.crib-seat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.crib-seat--top {
+  align-self: center;
+}
+
+.crib-seat--bottom {
+  align-self: center;
+}
+
+/* Name plate above/below a player's hand */
+.crib-nameplate {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.crib-nameplate .crib-score {
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  padding: 0.05rem 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.crib-nameplate .crib-dealer-chip,
+.crib-nameplate .crib-turn-chip {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+}
+
+.crib-nameplate .crib-dealer-chip {
+  background: #fef3c7;
+  color: #92400e;
+  text-shadow: none;
+}
+
+.crib-nameplate .crib-turn-chip {
+  background: #34d399;
+  color: #064e3b;
+  text-shadow: none;
+  animation: crib-pulse 1.2s ease-in-out infinite;
+}
+
+/* Cut-for-deal uses the FULL play width so all 52 cards fit in one row without
+   being cut off (the 0–0 peg board is hidden for this pre-game step only). */
+.crib-play-area--cut {
+  display: flex;
+}
+.crib-play-area--cut::before {
+  display: none;
+}
+.crib-play-area--cut .crib-pegboard {
+  display: none;
+}
+
+.crib-cut {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+/* All 52 backs spread across the full width as one horizontal row, overlapping
+   (absolute positions by %, inset by half a card so the ends are never cut
+   off). Cards are large to fill the window. */
+.crib-cut-fan {
+  --cut-w: clamp(3rem, 6vw, 5.5rem);
+  position: relative;
+  width: 96%;
+  margin: 0 auto;
+  height: calc(var(--cut-w) * 7 / 5 + 1.6rem);
+}
+
+/* Each card is its own reliable button; on hover it lifts and comes forward.
+   Scoped under .crib-cut-fan so these win over the base .crib-card rules
+   (otherwise position falls back to static and the row staircases). */
+.crib-cut-fan .crib-cut-pick {
+  position: absolute;
+  top: 50%;
+  width: var(--cut-w);
+  height: calc(var(--cut-w) * 7 / 5);
+  font-size: calc(var(--cut-w) * 7 / 5);
+  padding: 0;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.crib-cut-fan .crib-cut-pick:hover:not(:disabled),
+.crib-cut-fan .crib-cut-pick:focus-visible {
+  transform: translate(-50%, -62%);
+  outline: 4px solid #2563eb;
+  outline-offset: 1px;
+  z-index: 100 !important;
+}
+
+.crib-cut-fan .crib-cut-pick:disabled {
+  cursor: default;
+}
+
+/* Center area: deck, cut card, running count, pile */
+.crib-center {
+  /* Windowed: lift the deck / crib / count / pile / starter cluster OUT of flow
+     and float it over the middle of the felt, so the two hands get the full table
+     height instead of being squeezed around it (which clipped the cards). Full
+     screen restores it inline — see `.gameMaximized .crib-center` below. */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.4rem, 1.5cqw, 0.75rem);
+  /* Stay on ONE row: if this wraps, the starter card drops onto the hand below
+     and they overlap. Allow the row to shrink instead. */
+  flex-wrap: nowrap;
+  min-width: 0;
+  min-height: 0;
+  color: #fff;
+}
+
+/* Full screen: the cluster sits inline between the two hands again. */
+.gameMaximized .crib-center {
+  position: static;
+  transform: none;
+  width: auto;
+  max-width: none;
+}
+
+.crib-center .crib-count {
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.crib-center .crib-count strong {
+  display: block;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.crib-row {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.crib-labelled {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.crib-mini-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  /* dark pill so the label is clearly legible on the green felt */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+}
+
+/* Cards: realistic faces with a corner index and centre pips/figure */
+.crib-card {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: 10px;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  padding: 0;
+  /* font-size = card height, so all inner text scales with the card via em */
+  font-size: var(--card-h);
+  font-weight: 800;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+/* Corner index: a big rank over a smaller suit, mirrored at the bottom-right */
+.crib-card .crib-index {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.9;
+}
+
+.crib-card .crib-index--tl {
+  top: 5px;
+  left: 7px;
+}
+
+.crib-card .crib-index--br {
+  bottom: 5px;
+  right: 7px;
+  transform: rotate(180deg);
+}
+
+.crib-card .crib-index-rank {
+  font-size: 0.25em;
+  font-weight: 900;
+}
+
+.crib-card .crib-index-suit {
+  font-size: 0.14em;
+}
+
+/* A single suit symbol in the centre of every card */
+.crib-card .crib-figure {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.42em;
+}
+
+.crib-card.is-clickable {
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.crib-card.is-clickable:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.35);
+}
+
+.crib-card.is-picked {
+  transform: translateY(-12px);
+  outline: 6px solid #2563eb;
+  outline-offset: 1px;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 10px 16px rgba(0, 0, 0, 0.4);
+}
+
+.crib-card.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
+}
+
+/* Cards that produced the current scoring callout */
+.crib-card.is-highlight {
+  outline: 4px solid #facc15;
+  outline-offset: 0;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 16px 4px rgba(250, 204, 21, 0.8);
+  z-index: 2;
+  animation: crib-highlight-pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes crib-highlight-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 14px 3px rgba(250, 204, 21, 0.7);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 22px 7px rgba(250, 204, 21, 0.95);
+  }
+}
+
+/* Face-down card back */
+/* Blue Bicycle-style card back: royal blue with a fine texture, a white inner
+   frame, and a central star motif. */
+.crib-card--back {
+  border: 2px solid #fff;
+  background-color: var(--crib-back, #1f3a93);
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 5px);
+  box-shadow:
+    inset 0 0 0 4px var(--crib-back, #1f3a93),
+    inset 0 0 0 5px rgba(255, 255, 255, 0.85),
+    0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.crib-card--back::before {
+  content: "✦";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+}
+
+/* Deck stack in the centre */
+.crib-deck {
+  position: relative;
+  width: var(--card-w);
+  height: var(--card-h);
+}
+
+.crib-deck .crib-card--back {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.crib-deck .crib-card--back:nth-child(1) {
+  transform: translate(0, 0);
+}
+.crib-deck .crib-card--back:nth-child(2) {
+  transform: translate(2px, 2px);
+}
+.crib-deck .crib-card--back:nth-child(3) {
+  transform: translate(4px, 4px);
+}
+
+/* Dealing animation, cards fly out from the centre deck, staggered   */
+@keyframes crib-deal-down {
+  from {
+    transform: translate(0, -180px) scale(0.5) rotate(-8deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes crib-deal-up {
+  from {
+    transform: translate(0, 180px) scale(0.5) rotate(8deg);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.crib-deal-up,
+.crib-deal-down {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
+  animation-fill-mode: both;
+  animation-delay: calc(var(--deal-i, 0) * 0.13s);
+}
+
+.crib-deal-down {
+  animation-name: crib-deal-down;
+}
+
+.crib-deal-up {
+  animation-name: crib-deal-up;
+}
+
+@keyframes crib-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* A card being added to the play pile — drops in and settles */
+@keyframes crib-play-in {
+  0% {
+    transform: translateY(-34px) scale(0.65) rotate(-6deg);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(2px) scale(1.03);
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.crib-play-in {
+  animation: crib-play-in 0.38s cubic-bezier(0.2, 0.85, 0.3, 1.1) both;
+}
+
+/* Win / loss overlay */
+.crib-result-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 5;
+  animation: crib-fade-in 0.4s ease both;
+}
+
+@keyframes crib-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes crib-pop-in {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.crib-result-card {
+  text-align: center;
+  padding: 1.5rem 2.25rem;
+  border-radius: 16px;
+  background: #fff;
+  color: #1a2238;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  animation: crib-pop-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  /* Cap to the viewport so the popup is never clipped on a narrow window. */
+  max-width: min(90%, 92vw);
+  max-height: 85%;
+  overflow-y: auto;
+}
+
+/* Force dark text everywhere inside the white popup — wins over any global
+   light-text rule that would otherwise wash it out on the white card. */
+.crib-result-overlay .crib-result-card,
+.crib-result-overlay .crib-result-card p,
+.crib-result-overlay .crib-result-card li,
+.crib-result-overlay .crib-result-card strong,
+.crib-result-overlay .crib-result-card h3 {
+  color: #1a2238;
+}
+
+.crib-result-card .spacedSection {
+  text-align: left;
+}
+
+.crib-result-card .crib-result-emoji {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.crib-result-card .crib-result-title {
+  font-size: 1.9rem;
+  font-weight: 900;
+  margin: 0.4rem 0 0.2rem;
+}
+
+.crib-result-card.is-win .crib-result-title {
+  color: #15803d;
+}
+.crib-result-card.is-loss .crib-result-title {
+  color: #b91c1c;
+}
+
+.crib-result-card .crib-result-scoreline {
+  font-size: 1rem;
+  color: #374151;
+}
+
+/* Respect users who prefer no motion */
+@media (prefers-reduced-motion: reduce) {
+  .crib-deal-up,
+  .crib-deal-down,
+  .crib-play-in,
+  .crib-result-overlay,
+  .crib-result-card,
+  .crib-nameplate .crib-turn-chip {
+    animation: none !important;
+  }
+}
+
+/* "How to play" link sits in the top bar, grouped with the Settings button. */
+.crib-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crib-help-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  /* Dark translucent pill + a calm amber accent: distinct from every felt colour
+     (green / blue / crimson / teal / slate) without being loud enough to distract. */
+  border: 1px solid rgba(236, 201, 122, 0.35);
+  background: rgba(0, 0, 0, 0.32);
+  /* !important to win over the global `.content a` blue link colour, which would
+     otherwise drop the amber to a contrast-failing blue on the felt. */
+  color: #ecc97a !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.crib-help-link::before {
+  content: "?";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  background: rgba(236, 201, 122, 0.18);
+  color: #ecc97a;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.crib-help-link:hover {
+  color: #f5dd9e;
+  background: rgba(0, 0, 0, 0.5);
+  border-color: rgba(236, 201, 122, 0.6);
+}

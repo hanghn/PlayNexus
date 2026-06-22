@@ -1,0 +1,92 @@
+/* Floating stack of game-invitation toasts, pinned to the bottom-right corner
+   above the page content. */
+.game-invite-stack {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-width: min(22rem, calc(100vw - 2rem));
+}
+
+.game-invite-toast {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem;
+  background: #16233d;
+  border: 1px solid #2e4068;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+  color: #eaf0fb;
+  animation: game-invite-pop 0.25s ease both;
+}
+
+.game-invite-text {
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+/* Decline notice shown to the inviter — muted red accent */
+.game-invite-toast--declined {
+  border-color: #5a3340;
+  border-left: 3px solid #e8584e;
+}
+
+.game-invite-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Accept is the positive, prominent action (teal); Decline is muted and only
+   reads as destructive (red) on hover. */
+.game-invite-accept,
+.game-invite-decline {
+  padding: 0.45rem 1.1rem;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.game-invite-accept {
+  background: var(--teal);
+  color: #08231d;
+  border: none;
+}
+
+.game-invite-accept:hover {
+  background: #95d7c2;
+}
+
+.game-invite-decline {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e8;
+  border: 1px solid #3a577f;
+  font-weight: 700;
+}
+
+.game-invite-decline:hover {
+  background: rgba(232, 88, 78, 0.18);
+  border-color: #e8584e;
+  color: #ffb4ad;
+}
+
+.game-invite-accept:focus-visible,
+.game-invite-decline:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+@keyframes game-invite-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

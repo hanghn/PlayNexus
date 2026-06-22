@@ -1,0 +1,223 @@
+/* Forum pages — dark lobby aesthetic matching Home / Games */
+
+.forum-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 100%;
+  background: radial-gradient(120% 80% at 50% 0%, #14223c 0%, #0e1830 55%, #0a1120 100%);
+  color: #e8edf5;
+}
+
+/* Hero header */
+.forum-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.4rem 1.6rem;
+  border-radius: 1rem;
+  background: radial-gradient(120% 140% at 0% 0%, #1f3a5f 0%, #16233d 60%, #101a30 100%);
+  border: 1px solid #2e4068;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.forum-hero-title {
+  margin: 0;
+  font-size: 1.7rem;
+  color: #f4f1e0;
+}
+
+.forum-hero-sub {
+  margin: 0.3rem 0 0;
+  color: #9fb0cc;
+  font-size: 0.95rem;
+}
+
+.forum-cta {
+  flex-shrink: 0;
+  padding: 0.7rem 1.35rem;
+  border-radius: 0.7rem;
+  background: var(--teal);
+  color: #08231d;
+  border: none;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(124, 196, 180, 0.35);
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease;
+}
+
+.forum-cta:hover {
+  background: #95d7c2;
+  transform: translateY(-2px);
+}
+
+.forum-cta:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Thread list */
+.forum-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.forum-empty {
+  padding: 2.75rem 1.5rem;
+  text-align: center;
+  color: #9fb0cc;
+  border: 1px dashed #34507e;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Thread page — single post view */
+.thread-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 100%;
+  background: radial-gradient(120% 80% at 50% 0%, #14223c 0%, #0e1830 55%, #0a1120 100%);
+  color: #e8edf5;
+}
+
+.thread-hero {
+  padding: 1.4rem 1.6rem;
+  border-radius: 1rem;
+  background: radial-gradient(120% 140% at 0% 0%, #1f3a5f 0%, #16233d 60%, #101a30 100%);
+  border: 1px solid #2e4068;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.thread-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.5rem;
+  color: #f4f1e0;
+}
+
+.thread-body {
+  color: #c8d4e8;
+  line-height: 1.65;
+  font-size: 0.97rem;
+}
+
+.thread-byline {
+  margin-top: 0.75rem;
+  color: #9fb0cc;
+  font-size: 0.82rem;
+}
+
+/* Comment list */
+.thread-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.thread-comment {
+  padding: 0.85rem 1.1rem;
+  background: #1a2742;
+  border: 1px solid #283a5c;
+  border-radius: 0.7rem;
+  transition: border-color 0.15s ease;
+}
+
+.thread-comment:hover {
+  border-color: #3a5580;
+}
+
+.thread-comment-text {
+  color: #c8d4e8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.thread-comment-meta {
+  margin-top: 0.45rem;
+  color: #9fb0cc;
+  font-size: 0.8rem;
+}
+
+.thread-op-badge {
+  display: inline-block;
+  margin-left: 0.3rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(100, 140, 220, 0.2);
+  color: #7ba4e8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+}
+
+.thread-reply-section {
+  padding: 1.2rem 1.4rem;
+  background: #131e32;
+  border: 1px solid #243350;
+  border-radius: 0.8rem;
+}
+
+/* Reply button on a post / comment */
+.thread-reply-btn {
+  margin-left: 0.5rem;
+  border: 1px solid var(--border-1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-1);
+  border-radius: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.thread-reply-btn:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
+}
+
+/* Reddit-style reply reference: a subtle, indented line (thin connector + muted
+   text) rather than a filled bubble, so the forum reads differently from chat. */
+.thread-quote {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+  padding-left: 0.6rem;
+  border-left: 2px solid var(--border-1);
+  font-size: 0.82rem;
+}
+.thread-quote-sender {
+  font-weight: 700;
+  color: var(--blue-soft);
+}
+.thread-quote-sender::before {
+  content: "↳ Replying to ";
+  font-weight: 400;
+  color: var(--text-2);
+}
+.thread-quote-snippet {
+  color: var(--text-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+[data-contrast="high"] .thread-quote {
+  border-left-color: #fff;
+}
+[data-contrast="high"] .thread-quote-sender,
+[data-contrast="high"] .thread-quote-snippet {
+  color: #fff;
+}
+
+/* Delete-comment button (own comments only) */
+.thread-delete-btn:hover {
+  background: var(--coral) !important;
+  border-color: var(--coral) !important;
+  color: #fff;
+}

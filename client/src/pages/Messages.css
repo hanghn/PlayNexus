@@ -1,0 +1,295 @@
+/* Messages — dark, two-column split: inbox list (left) + conversation pane (right) */
+.dm-page {
+  display: grid;
+  grid-template-columns: 20rem minmax(0, 1fr);
+  height: var(--content-vh);
+  background: radial-gradient(120% 80% at 0% 0%, #1f3a5f 0%, #16233d 55%, #0e1830 100%);
+  color: var(--text-1);
+}
+
+.dm-page--state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Left: inbox ---- */
+.dm-inbox {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid var(--border-1);
+  background: rgba(14, 24, 48, 0.45);
+}
+
+.dm-inbox-head {
+  padding: 1rem 1rem 0.85rem;
+  border-bottom: 1px solid var(--border-1);
+}
+
+.dm-inbox-title {
+  margin: 0 0 0.7rem;
+  font-size: 1.4rem;
+  color: var(--cream);
+}
+
+.dm-new {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dm-new-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--border-1);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-1);
+  font-size: 0.9rem;
+}
+
+.dm-new-input::placeholder {
+  color: var(--text-2);
+}
+
+.dm-new-btn {
+  border: none;
+  border-radius: 0.55rem;
+  padding: 0 0.95rem;
+  font-weight: 800;
+  background: var(--teal);
+  color: #08231d;
+}
+
+.dm-new-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.dm-threads {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.dm-inbox-note {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+/* A conversation row — a button, but styled as a list item (not full-width slab) */
+.dm-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid transparent;
+  border-radius: 0.7rem;
+  background: none;
+  color: inherit;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.dm-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.dm-row.is-active {
+  background: rgba(63, 140, 255, 0.16);
+  border-color: var(--blue);
+}
+
+.dm-row-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  color: #07121f;
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+/* Avatar rendered from an uploaded image (inbox row + thread header). */
+.dm-avatar-img {
+  object-fit: cover;
+}
+
+.dm-row-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dm-row-name {
+  font-weight: 800;
+  color: var(--cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dm-row-preview {
+  color: var(--text-2);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dm-row-preview--empty {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* ---- Right: conversation pane ---- */
+.dm-pane-wrap {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.dm-pane {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.dm-pane--state {
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+}
+
+.dm-thread-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-1);
+  background: rgba(14, 24, 48, 0.55);
+}
+
+.dm-back {
+  display: none; /* shown only in the single-column (narrow) layout */
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-1);
+  border-radius: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.1rem;
+}
+
+.dm-thread-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  color: #07121f;
+  font-weight: 900;
+}
+
+.dm-thread-id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dm-thread-name {
+  font-weight: 800;
+  color: var(--cream);
+}
+
+.dm-thread-handle {
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+
+/* The shared chat components fill the remaining height and scroll internally. */
+.dm-pane .chatWindow {
+  flex: 1;
+  min-height: 0;
+}
+
+.dm-pane .messageCreation {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-1);
+}
+
+/* Empty state (no thread selected) */
+.dm-empty {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text-2);
+}
+
+.dm-empty-icon {
+  font-size: 2.5rem;
+}
+
+.dm-empty-text {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ---- Narrow screens: single column, swap inbox <-> pane ---- */
+@media (max-width: 640px) {
+  .dm-page {
+    grid-template-columns: 1fr;
+  }
+  .dm-pane-wrap {
+    display: none;
+  }
+  .dm-page.has-open .dm-inbox {
+    display: none;
+  }
+  .dm-page.has-open .dm-pane-wrap {
+    display: flex;
+  }
+  .dm-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Per-conversation unread badge on an inbox row. */
+.dm-row {
+  position: relative;
+}
+.dm-row-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.35rem;
+  margin-left: auto;
+  border-radius: 999px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+}

@@ -1,0 +1,213 @@
+.create-game {
+  position: relative;
+  display: inline-block;
+  /* Size to the button even when used as a flex item in a column (otherwise it
+     stretches full-width and the right-aligned menu jumps to the page edge). */
+  width: fit-content;
+}
+
+.create-game-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+}
+
+/* Dropdown of game types */
+.create-game-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  z-index: 201;
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  min-width: 13rem;
+  background: #16233d;
+  border: 1px solid #2e4068;
+  border-radius: 0.7rem;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
+.create-game-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  color: #eaf0fb;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.create-game-item:hover {
+  background: rgba(124, 196, 180, 0.16);
+}
+
+.create-game-item:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: -2px;
+}
+
+/* Cribbage mode popup */
+.create-game-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 26, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.create-game-modal {
+  width: min(24rem, calc(100vw - 2rem));
+  padding: 1.5rem;
+  background: #16233d;
+  border: 1px solid #2e4068;
+  border-radius: 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  color: #eaf0fb;
+  text-align: center;
+}
+
+.create-game-modal-title {
+  margin: 0 0 0.35rem;
+  font-size: 1.3rem;
+  color: #f4f1e0;
+}
+
+.create-game-modal-sub {
+  margin: 0 0 1.1rem;
+  color: #9fb0cc;
+  font-size: 0.92rem;
+}
+
+.create-game-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.create-game-choice {
+  padding: 0.75rem 1rem;
+  border-radius: 0.7rem;
+  border: 2px solid var(--teal);
+  background: var(--teal);
+  color: #08231d;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease;
+}
+
+.create-game-choice:hover:not(:disabled) {
+  background: #95d7c2;
+  transform: translateY(-2px);
+}
+
+/* The "invite a friend" alternative is outlined rather than filled */
+.create-game-choice--alt {
+  background: rgba(124, 196, 180, 0.12);
+  color: #eaf6f2;
+}
+
+.create-game-choice--alt:hover:not(:disabled) {
+  background: rgba(124, 196, 180, 0.24);
+}
+
+.create-game-choice:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Friend-picker step */
+.create-game-friends {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 16rem;
+  overflow-y: auto;
+}
+
+.create-game-friend {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  border-radius: 0.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #34507e;
+  color: #eaf0fb;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.create-game-friend:hover:not(:disabled) {
+  background: rgba(124, 196, 180, 0.16);
+  border-color: var(--teal);
+}
+
+.create-game-friend:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.create-game-friend-name {
+  font-weight: 800;
+}
+
+.create-game-friend-handle {
+  color: #9fb0cc;
+  font-size: 0.85rem;
+}
+
+.create-game-empty {
+  margin: 0.5rem 0;
+  color: #9fb0cc;
+  font-size: 0.92rem;
+}
+
+.create-game-error {
+  margin: 0.9rem 0 0;
+  color: #ffb4ad;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.create-game-cancel {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #9fb0cc;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.create-game-cancel:hover {
+  color: #eaf0fb;
+}
+
+.create-game-help-link {
+  display: inline-block;
+  margin: -0.2rem 0 0.8rem;
+  color: var(--blue-soft);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.create-game-help-link:hover {
+  text-decoration: underline;
+}

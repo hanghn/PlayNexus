@@ -1,0 +1,65 @@
+/* Skip-to-content link: hidden off-screen until it receives keyboard focus
+   (the very first Tab stop), then slides into the top-left corner. */
+.skip-link {
+  position: fixed;
+  top: -3.5rem;
+  left: 0.5rem;
+  z-index: 1000;
+  padding: 0.55rem 0.95rem;
+  border-radius: 0.5rem;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+/* The main region is focused programmatically when the skip link is used; don't
+   leave a lingering outline on it. */
+.right_main:focus {
+  outline: none;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 5rem 1fr;
+  /* minmax(0, 1fr) caps the content column at the available width; a plain 1fr
+     has an implicit min-width of min-content, which lets a long unbroken string
+     stretch the whole layout past the viewport. */
+  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-areas: "header header" "sidebar main";
+  min-height: 100vh;
+  --content-vh: calc(100vh - 5rem);
+  transition: grid-template-columns 0.15s ease;
+}
+
+/* Collapsed sidebar: shrink the rail to a thin strip with just the toggle */
+.main--navCollapsed {
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+}
+
+.right_main {
+  grid-area: main;
+  /* allow the main area to shrink below its content's intrinsic width */
+  min-width: 0;
+  /* Dark shell behind every page so there's no white flash during route
+     transitions / loading states (each page can still paint its own surface). */
+  background: var(--surface-0);
+}
+
+/* On phones/small tablets the fixed sidebar would eat the screen, so stack it
+   as a horizontal nav strip under the header and give the content the full
+   width. (The sidebar itself flips to a row in SideBarNav.css.) */
+@media (max-width: 680px) {
+  .main,
+  .main--navCollapsed {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 5rem auto 1fr;
+    grid-template-areas: "header" "sidebar" "main";
+    --content-vh: auto;
+  }
+}

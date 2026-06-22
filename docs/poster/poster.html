@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!--
+  PlayNexus — CS 4530 Final Project Poster (Group 111)
+  Light "scrapbook on cream paper" theme aligned with the slide deck
+  (cream #fdfaf2, navy #16223d, deck blue #2f6fd6, red, gold, pink, teal).
+  Lively doodle / collage layout: rotated photos, marker oval labels, curved
+  arrows, suit doodles.  Single page (1224x1584 px).
+
+  EDIT QUICK-GUIDE
+  - Keep these images in the SAME folder as this file (commit them too):
+      playnexus-brand-logo.png   screenshot-login.png         screenshot-cribbage-play.png
+      screenshot-gamecards.png   screenshot-friends.png       screenshot-messages.png
+      screenshot-notify.png      screenshot-security.png      screenshot-profile.png
+      screenshot-accessibility.png   screenshot-forum.png
+  - Each floating block is absolutely positioned (left/top) with a small rotate().
+    Nudge those numbers to rearrange.  Export: Chrome > Print > Save as PDF,
+    Letter, Margins None, Background graphics ON.  (Or use poster.pdf.)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>PlayNexus — CS 4530 Poster</title>
+<style>
+  :root{
+    --cream:#fdfaf2; --warm:#f3eedd;
+    --navy:#16223d; --navy-deep:#14203a;
+    --blue:#2f6fd6; --blue-deep:#1f51a8;
+    --red:#d8313f; --red-deep:#a51f2b;
+    --teal:#13a890; --teal-deep:#0c7c69;
+    --gold:#eab43a; --gold-deep:#c4901f;
+    --pink:#ef4f99; --pink-deep:#c01f6e;
+    --ink:#16223d; --slate:#2b3a55;
+    --panel:#eef4ee; --panel-line:#cde0d2;
+    --mk:"Marker Felt","Comic Sans MS","Chalkboard SE","Segoe Print",cursive;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Calibri","Segoe UI","Trebuchet MS",sans-serif;color:var(--ink);
+       background:#e7e2d4;display:flex;justify-content:center;padding:16px}
+
+  /* cream paper sheet with a navy frame + gold inset line */
+  .poster{position:relative;width:1224px;height:1584px;overflow:hidden;
+    border:12px solid var(--navy);
+    box-shadow:inset 0 0 0 3px var(--gold), 0 14px 50px rgba(0,0,0,.3);
+    background:
+      radial-gradient(560px 460px at 50% 42%, rgba(255,255,255,.55), transparent 70%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='86' height='86'%3E%3Cg fill='%2316223d' fill-opacity='0.06' font-family='Georgia,serif' font-size='22'%3E%3Ctext x='12' y='30'%3E%E2%99%A0%3C/text%3E%3Ctext x='54' y='34'%3E%E2%99%A5%3C/text%3E%3Ctext x='16' y='72'%3E%E2%99%A3%3C/text%3E%3Ctext x='52' y='74'%3E%E2%99%A6%3C/text%3E%3C/g%3E%3C/svg%3E") 0 0/86px 86px,
+      radial-gradient(1300px 900px at 50% 4%, #ffffff 0%, var(--cream) 50%, var(--warm) 100%);}
+  .poster::before{content:"";position:absolute;z-index:0;left:50%;top:-720px;transform:translateX(-50%);
+    width:1820px;height:1820px;border-radius:50%;border:3px solid rgba(47,111,214,.14)}
+
+  /* faint suit watermarks + scattered doodles */
+  .sticker{position:absolute;z-index:0;line-height:1;pointer-events:none;user-select:none}
+  .spark{position:absolute;z-index:5;color:var(--blue);pointer-events:none}
+
+  /* big gradient-filled suit doodles + poker chips + confetti for a lively table */
+  .suit{position:absolute;z-index:0;line-height:1;pointer-events:none;user-select:none;
+    -webkit-background-clip:text;background-clip:text;color:transparent;opacity:.34}
+  .suit.s1{background:linear-gradient(135deg,#2f6fd6,#13a890)}
+  .suit.s2{background:linear-gradient(135deg,#d8313f,#ef4f99)}
+  .suit.s3{background:linear-gradient(135deg,#16223d,#2f6fd6)}
+  .suit.s4{background:linear-gradient(135deg,#eab43a,#d8313f)}
+  .suit.s5{background:linear-gradient(135deg,#13a890,#2f6fd6)}
+  .suit.s6{background:linear-gradient(135deg,#ef4f99,#eab43a)}
+  .pchip{position:absolute;z-index:0;border-radius:50%;pointer-events:none;opacity:.32;
+    background:repeating-conic-gradient(var(--c) 0 18deg,#ffffff 18deg 36deg);
+    box-shadow:inset 0 0 0 9px var(--c), inset 0 0 0 12px rgba(255,255,255,.9), 2px 3px 7px rgba(22,34,61,.25)}
+  .conf{position:absolute;z-index:1;line-height:1;pointer-events:none;user-select:none;
+    filter:drop-shadow(1.5px 1.5px 0 rgba(22,34,61,.18))}
+
+  /* ===== extra GAMING background doodles (dice, mini cards, pegs, board) ===== */
+  /* tumbling dice — unicode pips, colorful, only seen in the paper gaps */
+  .die{position:absolute;z-index:1;line-height:1;pointer-events:none;user-select:none;
+    filter:drop-shadow(1.5px 2px 0 rgba(22,34,61,.22))}
+  /* little hand-drawn playing cards fanned across the paper */
+  .card{position:absolute;z-index:1;width:46px;height:64px;border-radius:7px;background:#fffaf2;
+    border:2.5px solid #16223d;box-shadow:2px 3px 0 rgba(22,34,61,.22);pointer-events:none;
+    font-family:Georgia,"Times New Roman",serif;font-weight:800;line-height:1}
+  .card .ix{position:absolute;top:3px;left:5px;font-size:15px}
+  .card .pip{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);font-size:26px}
+  .card.r{color:#d8313f} .card.b{color:#16223d}
+  /* cribbage scoring pegs — the "peg in" motif */
+  .peg{position:absolute;z-index:1;width:11px;height:27px;border-radius:7px;background:var(--c);
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.55),1px 2px 0 rgba(22,34,61,.3);pointer-events:none}
+  /* doodled cribbage peg-board track (rows of holes) */
+  .pegboard{position:absolute;z-index:0;pointer-events:none;opacity:.5}
+  .pegboard circle{fill:none;stroke:var(--navy);stroke-width:2.4}
+  .pegboard path{fill:none;stroke:rgba(22,34,61,.35);stroke-width:2.4;stroke-dasharray:2 9;stroke-linecap:round}
+
+  /* slogan ribbon under the tagline */
+  .slogan{font-family:var(--mk);font-weight:700;font-size:21px;color:#fff;background:var(--navy);
+    display:inline-block;padding:7px 16px;border-radius:12px;border:3px solid var(--gold);
+    box-shadow:3px 4px 0 rgba(22,34,61,.34);letter-spacing:.4px;margin-top:11px;transform:rotate(-1.5deg)}
+  .slogan .a{color:#ffd76a} .slogan .b{color:#7fd9c8} .slogan .c{color:#ff9bc4}
+
+  /* floating photo (screenshots show in FULL, never cropped) — clean white matte
+     with a soft lift shadow so the dark app screens pop on the cream paper */
+  .photo{position:absolute;z-index:4;background:#fff;padding:3px;border-radius:5px;
+    box-shadow:0 7px 18px rgba(22,34,61,.20)}
+  .photo img{display:block;width:100%;height:auto;border-radius:3px}
+  .photo.bare{background:none;border:none;box-shadow:none;padding:0}
+
+  /* hand-drawn marker oval labels */
+  .oval{position:absolute;z-index:7;font-family:var(--mk);font-weight:700;font-size:21px;line-height:1.05;
+    padding:6px 16px;border-radius:50%;background:#fffaf0;box-shadow:3px 4px 0 rgba(22,34,61,.34);white-space:nowrap}
+  .oval.sm{font-size:17px;padding:5px 13px}
+  .oval.pink{color:#c01f6e;border:3px solid #ef4f99}
+  .oval.teal{color:#0b6c5b;border:3px solid #17b89c}
+  .oval.gold{color:#8a5d00;border:3px solid #efb53c}
+  .oval.blue{color:#1f51a8;border:3px solid #2f6fd6}
+  .oval.red{color:#fff;background:var(--red);border:3px solid #7d1822}
+  .oval.navy{color:#fff;background:var(--navy);border:3px solid #0a1c22}
+
+  /* light notes straight on the paper */
+  .note{position:absolute;z-index:5;color:var(--slate);font-size:13px;line-height:1.36}
+  .note b,.note .lead{color:var(--blue-deep);font-weight:800}
+  .note ul{list-style:none} .note li{position:relative;padding-left:18px;margin-bottom:4px}
+  .note li::before{content:"\2660";position:absolute;left:0;top:1px;color:var(--gold-deep);font-size:11px}
+  /* caption that EXPLAINS a screenshot — dark ink with a soft white halo for legibility */
+  .cap{position:absolute;z-index:6;font-family:var(--mk);font-size:17.5px;font-weight:700;color:var(--navy);
+    text-shadow:0 1px 0 rgba(255,255,255,.75),0 0 6px rgba(255,255,255,.55);white-space:nowrap}
+  .cap.wrap{white-space:normal;width:344px;text-align:center;line-height:1.28}
+
+  /* curved arrows */
+  .arrow{position:absolute;z-index:6}
+  .arrow path{fill:none;stroke:var(--navy);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+  .arrow.blue path{stroke:var(--blue)}
+
+  /* title */
+  .logo{position:absolute;z-index:6;width:306px;height:auto;transform:rotate(-5deg);
+    filter:drop-shadow(2px 3px 0 rgba(22,34,61,.28))}
+  .pn{position:absolute;z-index:6}
+  .tagline{font-family:var(--mk);font-weight:700;font-size:25px;color:var(--navy);line-height:1.16}
+  .tagline em{font-style:normal;color:var(--blue)}
+  .desc{color:var(--slate);font-size:13.5px;line-height:1.42;margin-top:8px;font-weight:600}
+  .team{font-family:var(--mk);color:var(--pink-deep);font-weight:700;font-size:16px;margin-top:8px}
+  .btns{margin-top:10px;display:flex;gap:12px}
+  .btns a{text-decoration:none;font-weight:800;font-size:15px;padding:9px 22px;border-radius:11px;
+    border:3px solid var(--navy);box-shadow:3px 3px 0 rgba(22,34,61,.32)}
+  .btns a.demo{background:var(--gold);color:#2a1c00} .btns a.repo{background:var(--blue);color:#fff}
+
+  .grp{position:absolute;z-index:8;background:var(--red);color:#fff;font-weight:800;text-align:center;
+    line-height:.95;font-size:46px;padding:16px 26px;border-radius:18px;border:4px solid var(--navy);
+    box-shadow:4px 5px 0 rgba(22,34,61,.35)}
+  .grp small{display:block;font-size:18px;letter-spacing:5px;margin-bottom:5px;font-weight:800}
+
+  .flag{position:absolute;z-index:8;font-family:var(--mk);background:var(--red);color:#fff;font-weight:700;
+    font-size:15px;padding:5px 14px;border-radius:9px;border:2.5px solid var(--navy);box-shadow:2px 2px 0 rgba(22,34,61,.3)}
+
+  /* ===== "Under the hood" designed panel ===== */
+  .panel{position:absolute;z-index:3;background:var(--panel);border:2.5px solid #20406e;
+    border-radius:18px;box-shadow:4px 6px 0 rgba(22,34,61,.18)}
+  .uhh{position:absolute;z-index:6}
+  .chiprow{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{font-weight:800;font-size:12px;color:#163a63;background:#fff;
+    border:2px solid var(--blue);border-radius:999px;padding:3px 10px;box-shadow:1px 2px 0 rgba(22,34,61,.16)}
+  .uhh .note{position:static;color:var(--slate)}
+  .next{margin-top:7px;font-size:12px;color:var(--navy);
+    border-left:5px solid var(--blue);padding-left:9px;line-height:1.3}
+  .next b{color:var(--blue-deep)}
+  .credit{margin-top:7px;text-align:center;color:var(--navy);font-weight:700;font-size:12px}
+  .credit b{color:var(--blue-deep)}
+
+  .foot{position:absolute;z-index:6;left:0;right:0;bottom:12px;text-align:center;color:var(--navy);
+    font-weight:700;font-size:13px}
+  .foot b{color:var(--blue-deep)}
+
+  @media print{
+    /* scale the 1224x1584 sheet down to fit exactly one 8.5x11 Letter page
+       (816x1056 css px). zoom scales the layout box too, so it stays one page. */
+    body{background:#fff;padding:0;margin:0}
+    .poster{zoom:0.66667;box-shadow:inset 0 0 0 3px var(--gold)}
+    @page{size:8.5in 11in;margin:0}
+  }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- BIG gradient poker-suit shapes — the color comes from these (all behind content) -->
+  <!-- four corners -->
+  <div class="suit s3" style="left:-64px;top:-72px;font-size:330px;transform:rotate(-12deg)">&spades;</div>
+  <div class="suit s2" style="right:-72px;top:-60px;font-size:300px;transform:rotate(14deg)">&hearts;</div>
+  <div class="suit s5" style="left:-70px;top:1260px;font-size:300px;transform:rotate(12deg)">&clubs;</div>
+  <div class="suit s6" style="right:-70px;top:1250px;font-size:300px;transform:rotate(-10deg)">&diams;</div>
+  <!-- side edges -->
+  <div class="suit s1" style="left:-56px;top:540px;font-size:300px;transform:rotate(-16deg)">&spades;</div>
+  <div class="suit s2" style="right:-60px;top:430px;font-size:250px;transform:rotate(12deg)">&hearts;</div>
+  <div class="suit s1" style="right:-66px;top:760px;font-size:250px;transform:rotate(10deg)">&clubs;</div>
+  <div class="suit s4" style="left:-44px;top:980px;font-size:220px;transform:rotate(-9deg)">&diams;</div>
+  <!-- bottom-center gold accent -->
+  <div class="suit s4" style="left:40%;top:1130px;font-size:260px;transform:rotate(8deg)">&clubs;</div>
+
+  <!-- a few small suit confetti, only seen in the paper gaps -->
+  <div class="conf" style="left:255px;top:14px;font-size:27px;color:#d8313f;transform:rotate(-12deg)">&diams;</div>
+  <div class="conf" style="left:646px;top:690px;font-size:26px;color:#13a890;transform:rotate(-10deg)">&clubs;</div>
+  <div class="conf" style="left:300px;top:900px;font-size:27px;color:#16223d;transform:rotate(13deg)">&spades;</div>
+  <div class="conf" style="left:760px;top:1126px;font-size:26px;color:#13a890;transform:rotate(-11deg)">&clubs;</div>
+
+  <!-- a couple of tumbling dice -->
+  <div class="die" style="left:470px;top:104px;font-size:32px;color:#2f6fd6;transform:rotate(-12deg)">&#9856;</div>
+  <div class="die" style="left:466px;top:944px;font-size:30px;color:#c4901f;transform:rotate(8deg)">&#9857;</div>
+
+  <!-- two little playing cards -->
+  <div class="card b" style="left:18px;top:640px;transform:rotate(-10deg)"><span class="ix">10&clubs;</span><span class="pip">&clubs;</span></div>
+  <div class="card r" style="left:1150px;top:1000px;transform:rotate(-9deg)"><span class="ix">Q&diams;</span><span class="pip">&diams;</span></div>
+
+  <!-- doodled cribbage peg-board track -->
+  <svg class="pegboard" style="left:470px;top:1300px" width="150" height="60" viewBox="0 0 150 60">
+    <path d="M8,16 H142"/><path d="M8,44 H142"/>
+    <circle cx="14" cy="16" r="3.4"/><circle cx="38" cy="16" r="3.4"/><circle cx="62" cy="16" r="3.4"/><circle cx="86" cy="16" r="3.4"/><circle cx="110" cy="16" r="3.4"/><circle cx="134" cy="16" r="3.4"/>
+    <circle cx="14" cy="44" r="3.4"/><circle cx="38" cy="44" r="3.4"/><circle cx="62" cy="44" r="3.4"/><circle cx="86" cy="44" r="3.4"/><circle cx="110" cy="44" r="3.4"/><circle cx="134" cy="44" r="3.4"/>
+  </svg>
+
+  <div class="spark" style="left:1158px;top:700px;font-size:22px">&#10022;</div>
+  <div class="spark" style="left:28px;top:912px;font-size:20px;color:var(--gold-deep)">&#10022;</div>
+
+  <!-- ===== HEADER: logo + title + login + group ===== -->
+  <img class="logo" src="playnexus-brand-logo.png" alt="PlayNexus logo" style="left:12px;top:12px" />
+  <div class="pn" style="left:330px;top:44px;width:400px">
+    <div class="tagline">Live <em>social gaming</em>!<br>play &amp; message together!</div>
+    <div class="slogan"><span class="a">Pull up.</span> <span class="b">Peg in.</span> <span class="c">Play on.</span></div>
+    <p class="desc">Tired of being shoved into ranked queues with strangers? PlayNexus brings correspondence
+      gaming back to its calmer roots: build a profile, friend who you actually play with, and enjoy
+      classics like Cribbage at your own pace. No friend online? Take on our AI on Easy or Hard.</p>
+    <div class="team" style="color:var(--blue-deep);margin-top:5px;font-size:14px">&#9733; Your next favorite game night lives here.</div>
+    <div class="team">Hansen Cao &middot; Liam Foley &middot; Silu Wang &middot; Hang Hang</div>
+    <div class="btns">
+      <a class="demo" href="https://su26-group-111.onrender.com">&#9654; Live Demo</a>
+      <a class="repo" href="https://github.com/neu-cs4530/su26-group-111">Repo</a>
+    </div>
+  </div>
+
+  <div class="oval teal sm" style="left:736px;top:30px;transform:rotate(-5deg)">Log in!</div>
+  <div class="photo" style="left:738px;top:66px;width:296px;transform:rotate(3deg)">
+    <img src="screenshot-login.png" alt="PlayNexus login page" />
+  </div>
+  <div class="cap" style="left:746px;top:276px;transform:rotate(2deg)">suit-themed sign-in</div>
+
+  <div class="grp" style="right:34px;top:40px;transform:rotate(4deg)"><small>GROUP</small>111</div>
+
+  <!-- ===== CRIBBAGE FLAGSHIP (right) ===== -->
+  <div class="flag" style="left:700px;top:316px;transform:rotate(-5deg)">&#9733; NEW FLAGSHIP GAME</div>
+  <div class="photo" style="left:668px;top:352px;width:518px;transform:rotate(-2deg)">
+    <img src="screenshot-cribbage-play.png" alt="Cribbage mid-game vs Sam: pegging play pile, 'Fifteen for 2', count, starter cut and live pegging board" />
+  </div>
+  <div class="oval pink" style="left:556px;top:392px;transform:rotate(-7deg)">Cribbage vs. AI!</div>
+  <div class="cap" style="left:1002px;top:326px;transform:rotate(3deg)">live pegging board &#9829;</div>
+  <svg class="arrow" style="left:1092px;top:352px" width="50" height="82" viewBox="0 0 100 164"><path d="M52,12 Q82,64 56,146"/><path d="M56,146 l-20,-16 m20,16 l16,-18"/></svg>
+  <div class="cap" style="left:700px;top:682px;transform:rotate(-1deg)">Easy &amp; Hard AI &middot; play-to-121 &middot; custom board &amp; card colors</div>
+
+  <!-- ===== GAME CARDS (left, under title) ===== -->
+  <div class="oval gold" style="left:54px;top:326px;transform:rotate(-3deg)">3 games, 1 click!</div>
+  <div class="photo bare" style="left:46px;top:382px;width:456px;transform:rotate(1.5deg)">
+    <img src="screenshot-gamecards.png" alt="Game lobby cards: Cribbage, Nim, Number Guesser" />
+  </div>
+  <div class="cap" style="left:56px;top:616px;transform:rotate(2deg)">solo vs. the bot, or with a friend!</div>
+  <svg class="arrow blue" style="left:512px;top:430px;transform:rotate(8deg)" width="78" height="170" viewBox="0 0 100 220"><path d="M18,12 Q88,46 58,196"/><path d="M58,196 l-22,-15 m22,15 l13,-21"/></svg>
+
+  <!-- ===== MESSAGES (left) ===== -->
+  <div class="oval teal" style="left:56px;top:656px;transform:rotate(3deg)">Messaging!</div>
+  <div class="photo" style="left:48px;top:708px;width:388px;transform:rotate(-2deg)">
+    <img src="screenshot-messages.png" alt="Direct messages with live unread counts" />
+  </div>
+  <div class="cap" style="left:60px;top:906px;transform:rotate(-2deg)">real-time chat &middot; live unread counts</div>
+
+  <!-- ===== FRIENDS + NOTIFICATIONS (right) ===== -->
+  <div class="oval pink" style="left:520px;top:704px;transform:rotate(-4deg)">Friends!</div>
+  <div class="photo" style="left:508px;top:756px;width:356px;transform:rotate(2.5deg)">
+    <img src="screenshot-friends.png" alt="Friends list with online status and invites" />
+  </div>
+  <div class="cap" style="left:520px;top:950px;transform:rotate(-2deg)">see who's online &middot; invite to play</div>
+
+  <div class="oval red" style="left:902px;top:704px;transform:rotate(5deg)">&#128276; New!</div>
+  <div class="photo" style="left:892px;top:758px;width:300px;transform:rotate(-3deg)">
+    <img src="screenshot-notify.png" alt="Notification bell with two pending friend requests" />
+  </div>
+  <div class="cap" style="left:896px;top:978px;transform:rotate(3deg)">friend-request bell, every page</div>
+
+  <!-- ===== PERSONALIZE ROW ===== -->
+  <div class="oval navy" style="left:56px;top:952px;transform:rotate(-4deg)">Stay secure!</div>
+  <div class="photo" style="left:54px;top:1006px;width:220px;transform:rotate(3deg)">
+    <img src="screenshot-security.png" alt="Security settings: email 2FA, cookies, sign out of all devices" />
+  </div>
+  <div class="cap" style="left:42px;top:1256px;transform:rotate(-2deg)">email 2FA &middot; sign out everywhere</div>
+
+  <div class="oval gold" style="left:310px;top:962px;transform:rotate(3deg)">Make it yours!</div>
+  <div class="photo" style="left:302px;top:1016px;width:348px;transform:rotate(-2deg)">
+    <img src="screenshot-profile.png" alt="Customizable profile with accent color and recent games" />
+  </div>
+  <div class="cap" style="left:310px;top:1252px;transform:rotate(2deg)">avatar &middot; bio &middot; accent colors</div>
+
+  <div class="oval blue" style="left:856px;top:1004px;transform:rotate(4deg)">For everyone!</div>
+  <div class="photo" style="left:790px;top:1058px;width:358px;transform:rotate(-3deg)">
+    <img src="screenshot-accessibility.png" alt="Accessibility: text-to-speech read-aloud, text size, reduce motion, high contrast" />
+  </div>
+  <div class="cap wrap" style="left:798px;top:1244px;transform:rotate(1deg)">read-aloud (text-to-speech) &middot; text size &middot; reduce-motion &middot; high-contrast</div>
+
+  <!-- ===== FORUM (left) ===== -->
+  <div class="oval pink" style="left:62px;top:1284px;transform:rotate(-3deg)">Brag &amp; banter!</div>
+  <div class="photo" style="left:56px;top:1316px;width:540px;transform:rotate(1.4deg)">
+    <img src="screenshot-forum.png" alt="Community forum: threads with reply counts, authors and timestamps" />
+  </div>
+  <div class="cap" style="left:456px;top:1290px;transform:rotate(3deg)">upgraded forum &#9824;</div>
+
+  <!-- ===== UNDER THE HOOD + WHAT'S NEXT (right) — designed panel ===== -->
+  <div class="panel" style="left:638px;top:1294px;width:528px;height:262px;transform:rotate(0.4deg)"></div>
+  <div class="oval navy" style="left:688px;top:1278px;transform:rotate(-3deg);z-index:9">Under the hood</div>
+  <div class="uhh" style="left:660px;top:1324px;width:486px">
+    <div class="chiprow">
+      <span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">Express</span>
+      <span class="chip">Socket.io</span><span class="chip">Supabase / Postgres</span>
+      <span class="chip">Render CI/CD</span><span class="chip">Playwright + axe-core</span>
+    </div>
+    <ul class="note" style="margin-top:7px;line-height:1.26">
+      <li><span class="lead">Server-authoritative:</span> every move is validated &amp; keyed-locked server-side, then pushed over Socket.io rooms &mdash; no client cheating, no polling</li>
+      <li>Auth sessions guarded by Postgres <span class="lead">row-level security</span>; end-to-end shared types, and a CI gate (lint &middot; Playwright + axe-core) auto-deploys the monorepo to Render on each merge</li>
+    </ul>
+    <div class="next"><b>What's next:</b> Expert AI via Expectiminimax &middot; invite a friend to spectate your live
+      match &middot; ranked ladders &amp; tournaments &middot; more classics (Chess, Euchre, Backgammon) &middot;
+      unlockable board &amp; card themes &middot; full mobile PWA with push notifications</div>
+  </div>
+
+</div>
+</body>
+</html>

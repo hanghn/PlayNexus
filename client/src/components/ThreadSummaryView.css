@@ -1,0 +1,69 @@
+.thread-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1.1rem;
+  background: #1a2742;
+  border: 1px solid #283a5c;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.thread-row:hover {
+  border-color: var(--teal);
+  transform: translateX(3px);
+}
+
+.thread-row:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.thread-row-replies {
+  flex-shrink: 0;
+  width: 4rem;
+  text-align: center;
+  color: #7ba4e8;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.thread-row-replies-count {
+  display: block;
+  font-size: 1.2rem;
+  color: #9fb0cc;
+}
+
+.thread-row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.thread-row-title {
+  color: #f4f1e0;
+  font-weight: 600;
+  font-size: 0.97rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thread-row-meta {
+  margin-top: 0.2rem;
+  color: #9fb0cc;
+  font-size: 0.78rem;
+}
+
+.thread-row-activity {
+  flex-shrink: 0;
+  color: #9fb0cc;
+  font-size: 0.78rem;
+  text-align: right;
+  white-space: nowrap;
+}

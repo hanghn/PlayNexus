@@ -1,0 +1,143 @@
+/* Container is the base class for the login page */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* center the logo + form vertically on the page */
+  min-height: 100vh;
+  padding: 20px;
+  /* Dark theme: a teal spotlight glow behind the badge, faint card
+     suits, over a deep-navy gradient. Page text is light, so contrast stays AAA. */
+  background-color: #14203a;
+  background-image:
+    radial-gradient(circle at 50% 22%, rgba(124, 196, 180, 0.22) 0%, rgba(20, 32, 58, 0) 46%),
+    url("/gamenight-bg-dark.svg"),
+    radial-gradient(130% 110% at 50% 28%, #243d63 0%, #16243f 55%, #0c1530 100%);
+  background-repeat: no-repeat, repeat, no-repeat;
+  background-size:
+    cover,
+    150px 150px,
+    cover;
+}
+
+/* badge image with the tagline curving around its bottom half (SVG) */
+.login-badge {
+  width: min(550px, 85vw);
+  height: auto;
+  margin-bottom: -2rem; /* pull the form up to tighten the gap under the badge */
+}
+
+.arc-text {
+  font-family: "Fredoka", "Poppins", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  fill: var(--cream);
+  letter-spacing: 0.2px;
+}
+
+form.login {
+  width: min(400px, 100%);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background-color: #badcd8;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 0 5px #000;
+}
+
+form.login .primary {
+  background-color: var(--navy);
+}
+
+form.login .primary:hover {
+  background-color: var(--navy-deep);
+}
+
+/* Password field with an eye toggle pinned to the right. */
+.login-field {
+  position: relative;
+  display: flex;
+}
+.login-field-input {
+  padding-right: 2.75rem;
+}
+.login-eye {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.4rem;
+  background: none;
+  color: var(--navy);
+  opacity: 0.65;
+}
+.login-eye:hover,
+.login-eye:focus-visible {
+  opacity: 1;
+}
+
+/* Clean "or" divider: a centered label between two rules. */
+.login-or {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+.login-or-line {
+  flex: 1;
+  border-top: 2px dashed rgba(20, 32, 58, 0.35);
+}
+.login-or-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  /* full navy (no opacity) so it clears WCAG AA contrast on the light card */
+  color: var(--navy);
+}
+
+/* "Don't have an account? Sign up" line. */
+.login-switch {
+  margin: 0;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--navy);
+}
+.login-switch-link {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 800;
+  /* dark navy (not teal) so the link clears WCAG AA on the light teal card;
+     the underline + weight keep it readable as a link */
+  color: var(--navy-deep);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.login-switch-link:hover {
+  color: #000;
+}
+
+form.login .labeled-section {
+  display: flex;
+  flex-direction: row;
+  gap: 0.6rem;
+}
+
+/* elevated card on the dark background */
+form.login {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* page-level text sits on the dark background*/
+.container .smallAndGray {
+  color: #aebdd6;
+  opacity: 0.95;
+}

@@ -1,0 +1,111 @@
+/* Number Guesser — dark, on-brand layout (solid surfaces, no gradients) */
+.gg {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.4rem 1.6rem;
+  color: var(--text-1);
+  max-width: 40rem;
+}
+
+.gg-hero {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.gg-hero-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.gg-title {
+  margin: 0;
+  color: var(--cream);
+  font-size: 1.5rem;
+}
+.gg-sub {
+  margin: 0.15rem 0 0;
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+/* Player status rows */
+.gg-players {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.gg-player {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.6rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+}
+.gg-player--win {
+  border-color: var(--teal);
+  background: rgba(124, 196, 180, 0.12);
+}
+.gg-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #6b7a93;
+  flex-shrink: 0;
+}
+.gg-dot.is-done {
+  background: var(--teal);
+}
+.gg-player-text {
+  flex: 1;
+}
+.gg-crown {
+  font-size: 1.1rem;
+}
+
+/* Guess form */
+.gg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  border-radius: 0.9rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+}
+.gg-readout {
+  align-self: center;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--blue-soft);
+}
+.gg-slider-label {
+  text-align: center;
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+.gg-range {
+  width: 100%;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+.gg-submit {
+  align-self: center;
+  margin-top: 0.3rem;
+  min-width: 12rem;
+}
+.gg-tip {
+  margin: 0;
+  text-align: center;
+  color: var(--text-2);
+  font-size: 0.8rem;
+}
+.gg-waiting {
+  color: var(--text-2);
+  font-style: italic;
+}

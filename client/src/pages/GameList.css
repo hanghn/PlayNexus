@@ -1,0 +1,140 @@
+.games-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  /* Paint the dark lobby backdrop so the page is coherent with the rest of the
+     app instead of sitting on the default light surface. */
+  min-height: 100%;
+  background: radial-gradient(120% 80% at 50% 0%, #14223c 0%, #0e1830 55%, #0a1120 100%);
+  color: #e8edf5;
+}
+
+/* Gradient hero header with the title, a count, and the primary CTA */
+.games-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.4rem 1.6rem;
+  border-radius: 1rem;
+  background: radial-gradient(120% 140% at 0% 0%, #1f3a5f 0%, #16233d 60%, #101a30 100%);
+  border: 1px solid #2e4068;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+}
+
+.games-hero-title {
+  margin: 0;
+  font-size: 1.7rem;
+  color: #f4f1e0;
+}
+
+.games-hero-sub {
+  margin: 0.3rem 0 0;
+  color: #9fb0cc;
+  font-size: 0.95rem;
+}
+
+.games-cta {
+  flex-shrink: 0;
+  padding: 0.7rem 1.35rem;
+  border-radius: 0.7rem;
+  background: var(--teal);
+  color: #08231d;
+  border: none;
+  font-weight: 800;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(124, 196, 180, 0.35);
+  transition:
+    transform 0.12s ease,
+    background 0.15s ease;
+}
+
+.games-cta:hover {
+  background: #95d7c2;
+  transform: translateY(-2px);
+}
+
+.games-cta:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* Filter tabs */
+.games-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.games-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #2e4068;
+  color: #cbd5e8;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition:
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.games-filter:hover {
+  background: rgba(124, 196, 180, 0.14);
+}
+
+.games-filter.is-active {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #08231d;
+}
+
+.games-filter-count {
+  font-size: 0.78rem;
+  font-weight: 800;
+  opacity: 0.8;
+}
+
+.games-filter.is-active .games-filter-count {
+  opacity: 1;
+}
+
+/* "View more" pager */
+.games-more {
+  align-self: center;
+  margin-top: 0.4rem;
+  padding: 0.65rem 1.5rem;
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #3a4f7a;
+  color: #eaf0fb;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.games-more:hover {
+  background: rgba(124, 196, 180, 0.16);
+  border-color: var(--teal);
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.games-empty {
+  padding: 2.75rem 1.5rem;
+  text-align: center;
+  color: #9fb0cc;
+  border: 1px dashed #34507e;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+}

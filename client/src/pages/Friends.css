@@ -1,0 +1,290 @@
+/* Friends — dark page, card-grid layout */
+.fr-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 100%;
+  padding: 1.25rem;
+  background: radial-gradient(120% 80% at 0% 0%, #1f3a5f 0%, #16233d 55%, #0e1830 100%);
+  color: var(--text-1);
+}
+
+/* Hero header with the title + add-friend form */
+.fr-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.3rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(124, 196, 180, 0.14), rgba(63, 140, 255, 0.06));
+  border: 1px solid var(--border-1);
+}
+
+.fr-hero-title {
+  margin: 0;
+  font-size: 1.7rem;
+  color: var(--cream);
+}
+
+.fr-hero-sub {
+  margin: 0.25rem 0 0;
+  color: var(--text-2);
+  font-size: 0.95rem;
+}
+
+.fr-add {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.fr-add-input {
+  min-width: 14rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border-1);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-1);
+  font-size: 0.95rem;
+}
+
+.fr-add-input::placeholder {
+  color: var(--text-2);
+}
+
+.fr-ok {
+  margin: 0;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+/* Sections */
+.fr-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.fr-section-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fr-count {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #08231d;
+  background: var(--teal);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+}
+
+/* Card grid */
+.fr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.9rem;
+}
+
+.fr-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.fr-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--teal);
+}
+
+.fr-card--ghost {
+  opacity: 0.7;
+}
+
+.fr-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.fr-avatar-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.fr-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  color: #07121f;
+  font-weight: 900;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.fr-avatar--img {
+  object-fit: cover;
+}
+
+/* Presence dot on the avatar */
+.fr-presence {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: #6b7a93;
+  border: 2px solid var(--surface-1);
+}
+
+.fr-presence.is-online {
+  background: #46d39a;
+  box-shadow: 0 0 8px #46d39a;
+}
+
+.fr-card-id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.fr-card-name {
+  font-weight: 800;
+  color: var(--cream);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fr-card-name:hover {
+  color: var(--teal);
+}
+
+.fr-card-handle {
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+
+.fr-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Accent buttons in the brand palette */
+.fr-btn {
+  border: none;
+  border-radius: 0.55rem;
+  padding: 0.45rem 0.9rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    transform 0.1s ease,
+    filter 0.12s ease;
+}
+
+.fr-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+}
+
+.fr-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.fr-btn--green {
+  background: var(--teal);
+  color: #08231d;
+}
+
+.fr-btn--blue {
+  background: var(--blue);
+  color: #04122e;
+}
+
+.fr-btn--red {
+  background: rgba(232, 88, 78, 0.16);
+  color: var(--coral-soft);
+  border: 1px solid var(--coral);
+}
+
+.fr-btn--muted {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-1);
+  border: 1px solid var(--border-1);
+}
+
+/* Invite dropdown */
+.fr-invite {
+  position: relative;
+  display: inline-block;
+}
+
+.fr-invite-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+
+.fr-invite-menu {
+  position: absolute;
+  top: calc(100% + 0.3rem);
+  left: 0;
+  z-index: 41;
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem;
+  min-width: 11rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-radius: 0.6rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.fr-invite-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.7rem;
+  background: none;
+  border: none;
+  border-radius: 0.4rem;
+  color: var(--text-1);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.fr-invite-item:hover {
+  background: rgba(124, 196, 180, 0.16);
+}
+
+/* Empty / loading */
+.fr-empty {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  color: var(--text-2);
+  border: 1px dashed var(--border-1);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.02);
+}

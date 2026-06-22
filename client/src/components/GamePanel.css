@@ -1,0 +1,342 @@
+.gamePanel {
+  padding: 1.25rem;
+  padding-right: 0.75rem;
+  display: grid;
+  grid-template-rows: 1fr;
+  min-height: 0;
+}
+
+/* Single game window: player status header on top, board embedded below */
+.gameWindow {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  min-height: 0;
+  background: #18253f;
+  border: 1px solid #29395c;
+  border-radius: 0.85rem;
+  overflow: hidden;
+}
+
+/* Roster header — now a section inside the window, with a divider below */
+.gameRoster {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #29395c;
+  padding: 0.5rem 1.15rem 0.55rem;
+}
+
+/* Once a game is live the roster is just a slim status strip — it shouldn't eat
+   the playfield. Tighten padding, shrink the title, drop the room-age line, and
+   lay the chips + Leave button on one compact row. */
+.gameRosterLive {
+  padding: 0.3rem 1.15rem;
+}
+
+.gameRosterLive .gameRosterTitle {
+  font-size: 1.25rem;
+}
+
+.gameRosterLive .gameRosterMeta {
+  display: none;
+}
+
+/* Live: chips and the Leave button share one wrapping row. */
+.gameRosterLive .gameRosterControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.gameRosterLive .gameRosterControls > * {
+  margin-top: 0;
+}
+
+/* Alerts break onto their own line rather than sitting inline with the chips. */
+.gameRosterLive .gameJoinError,
+.gameRosterLive .gameNotice {
+  flex-basis: 100%;
+}
+
+.gameRosterLive .playerChips {
+  margin-top: 0;
+  gap: 0.4rem;
+}
+
+.gameRosterLive .playerChip {
+  padding: 0.2rem 0.6rem 0.2rem 0.3rem;
+  font-size: 0.78rem;
+  gap: 0.35rem;
+}
+
+.gameRosterLive .playerChipBadge {
+  width: 1.15rem;
+  height: 1.15rem;
+  font-size: 0.66rem;
+}
+
+.gameRosterLive .gameLeaveBtn {
+  margin-top: 0.3rem;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.78rem;
+}
+
+.gameRosterTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.gameRosterTitle {
+  margin: 0;
+  color: #f4f1e0;
+  font-size: 1.15rem;
+}
+
+.gameRosterMeta {
+  margin-top: 0.1rem;
+  color: #94a6c4;
+  font-size: 0.72rem;
+}
+
+/* Live / lobby status pill */
+.gameStatusPill {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+}
+
+.gameStatusPill.isLive {
+  background: #7cc4b4;
+  color: #07241d;
+}
+
+.gameStatusPill.isLive::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #07241d;
+  animation: gamePulse 1.4s ease-in-out infinite;
+}
+
+.gameStatusPill.isLobby {
+  background: #2a3b5c;
+  color: #c7d4ea;
+}
+
+@keyframes gamePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Player chips replace the old dotted list */
+.playerChips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Push the status pill to the right end of the participant row */
+.statusPillRight {
+  margin-left: auto;
+}
+
+.playerChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.7rem 0.35rem 0.4rem;
+  background: #223152;
+  border: 1px solid #2e4068;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: #d7e0ef;
+}
+
+.playerChip.isYou {
+  background: rgba(124, 196, 180, 0.14);
+  border-color: var(--teal);
+  color: #eaf6f2;
+}
+
+.playerChipBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+  background: #2e4068;
+  color: #cdd9ec;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.playerChip.isYou .playerChipBadge {
+  background: var(--teal);
+  color: #07241d;
+}
+
+.playerChipName {
+  font-weight: 600;
+}
+
+/* Join / Start action */
+.gameActionBtn {
+  justify-self: start;
+  margin-top: 1rem;
+  background: var(--teal);
+  color: #07241d;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 0.55rem 1.4rem;
+  font-weight: 700;
+  min-height: 2.5rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.gameActionBtn:hover {
+  background: #95d7c2;
+}
+
+.gameActionBtn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Surfaced join/start failure (e.g. a rejected join) */
+.gameJoinError {
+  margin: 0.6rem 0 0;
+  color: #ffb4ad;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Informational notice (e.g. "X left the game") */
+.gameNotice {
+  margin: 0.6rem 0 0;
+  color: #c7d4ea;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* Leave-game button: muted, turns red on hover (a mild destructive action) */
+.gameLeaveBtn {
+  justify-self: start;
+  margin-top: 0.6rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e8;
+  border: 1px solid #3a4f7a;
+  border-radius: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 700;
+  min-height: 2.4rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.gameLeaveBtn:hover {
+  background: rgba(232, 88, 78, 0.18);
+  border-color: #e8584e;
+  color: #ffb4ad;
+}
+
+/* Dark play surface, on-brand with the rest of the app, clearly set apart from
+   the roster banner above it (top border + rounded top + inset shadow).
+   (Cribbage paints its own green felt full-bleed on top of this.) */
+.gameFrame {
+  /* Solid play surface, a touch LIGHTER than the roster banner above (#18253f)
+     so the play area reads as the brighter, active surface and the two areas
+     stay clearly separated. */
+  background: #213355;
+  color: var(--text-1);
+  border-top: 2px solid var(--border-1);
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: inset 0 8px 22px rgba(0, 0, 0, 0.22);
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Waiting state — themed dark, since there is no board yet */
+.gameFrame.waiting {
+  background: #131f37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #e8edf5;
+}
+
+.waitingInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.waitingDots {
+  display: inline-flex;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.waitingDots i {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: waitingBounce 1.2s ease-in-out infinite;
+}
+
+.waitingDots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.waitingDots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes waitingBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-0.4rem);
+    opacity: 1;
+  }
+}
+
+.waitingTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f4f1e0;
+}
+
+.waitingMeta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #94a6c4;
+}

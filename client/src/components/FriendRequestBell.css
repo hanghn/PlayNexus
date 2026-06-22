@@ -1,0 +1,157 @@
+.fr-bell {
+  position: relative;
+  display: inline-flex;
+}
+
+/* The bell button — large, clear focus ring for accessibility */
+.fr-bell-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #3a577f;
+  color: #eaf0fb;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.fr-bell-btn:hover {
+  background: rgba(124, 196, 180, 0.18);
+  border-color: var(--teal);
+}
+
+.fr-bell-btn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* Red count badge */
+.fr-bell-badge {
+  position: absolute;
+  top: -0.35rem;
+  right: -0.35rem;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  padding: 0 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #e8584e;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+  border: 2px solid #1b2a4a;
+}
+
+.fr-bell-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.fr-bell-menu {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 61;
+  width: 22rem;
+  max-width: calc(100vw - 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #16233d;
+  border: 1px solid #2e4068;
+  border-radius: 0.75rem;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
+.fr-bell-head {
+  font-weight: 800;
+  font-size: 1rem;
+  color: #f4f1e0;
+}
+
+.fr-bell-empty {
+  margin: 0;
+  color: #9fb0cc;
+  font-size: 0.9rem;
+}
+
+.fr-bell-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fr-bell-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.6rem 0.7rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #34507e;
+  border-radius: 0.55rem;
+}
+
+.fr-bell-name {
+  color: #f4f1e0;
+}
+
+.fr-bell-handle {
+  color: #9fb0cc;
+  font-size: 0.88rem;
+}
+
+.fr-bell-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Accept is the positive, prominent action (teal); Reject is muted and only
+   reads as destructive (red) on hover. */
+.fr-accept,
+.fr-reject {
+  padding: 0.45rem 1.1rem;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.fr-accept {
+  background: var(--teal);
+  color: #08231d;
+  border: none;
+}
+
+.fr-accept:hover {
+  background: #95d7c2;
+}
+
+.fr-reject {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e8;
+  border: 1px solid #3a577f;
+  font-weight: 700;
+}
+
+.fr-reject:hover {
+  background: rgba(232, 88, 78, 0.18);
+  border-color: #e8584e;
+  color: #ffb4ad;
+}
+
+.fr-accept:focus-visible,
+.fr-reject:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}

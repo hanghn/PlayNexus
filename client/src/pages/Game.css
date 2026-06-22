@@ -1,0 +1,73 @@
+/* Game page: board/roster on the left, chat on the right, over the same dark
+   radial backdrop as the lobby so the two pages feel like one product. */
+div.gameContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  height: var(--content-vh);
+  overflow-y: clip;
+  background: radial-gradient(120% 80% at 25% 0%, #14223c 0%, #0e1830 55%, #0a1120 100%);
+  color: #e8edf5;
+}
+
+/* Collapsed chat: the board takes the full width */
+div.gameContainer.chatHidden {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+div.gameContainer.chatHidden .chatContainer {
+  display: none;
+}
+
+/* Floating toggle that hides / shows the chat. Sits just left of the chat
+   column when open, and at the far edge when the chat is collapsed. */
+/* Floating game toolbar (Full screen + Hide chat), sitting on the game side of
+   the chat divider. */
+.gameTools {
+  position: absolute;
+  top: 0.75rem;
+  right: calc(340px + 0.75rem);
+  /* Below the header (50) so the account/notification dropdowns sit on top. In
+     full-screen the toolbar lives inside the maximized container, so it still
+     renders above the board there. */
+  z-index: 40;
+  display: flex;
+  gap: 0.5rem;
+}
+
+div.gameContainer.chatHidden .gameTools {
+  right: 0.75rem;
+}
+
+/* Rounded-rectangle buttons in the dark-navy palette of the game chrome */
+.gameToolBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  /* Teal-outlined chip style, matching the highlighted player chip */
+  background: rgba(124, 196, 180, 0.14);
+  color: #eaf6f2;
+  border: 1.5px solid var(--teal);
+  border-radius: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.gameToolBtn:hover {
+  background: rgba(124, 196, 180, 0.26);
+}
+
+.gameToolBtn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* Full-screen mode: the game window covers the whole viewport */
+div.gameContainer.gameMaximized {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1000;
+}

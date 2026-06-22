@@ -1,0 +1,78 @@
+/* Reddit-style comment composer: a single rounded, bordered box with the input
+   on top and a toolbar (emoji + submit) along the bottom. */
+.redditBox {
+  width: min(100%, 640px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border-1);
+  border-radius: 1.25rem;
+  background: var(--surface-1);
+}
+.redditBox:focus-within {
+  border-color: var(--blue);
+}
+
+/* "Replying to <user>" header (Reddit-style). */
+.redditBox-replyTo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+.redditBox-replyTo strong {
+  color: var(--text-1);
+}
+.redditBox-cancel {
+  border: none;
+  background: none;
+  color: var(--blue-soft);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+.redditBox-cancel:hover {
+  text-decoration: underline;
+}
+
+.redditBox-input {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 3rem;
+  border: none;
+  background: none;
+  color: var(--text-1);
+  font-size: 0.95rem;
+  padding: 0.2rem 0;
+}
+.redditBox-input:focus {
+  outline: none;
+}
+.redditBox-input::placeholder {
+  color: var(--text-2);
+}
+
+/* Bottom toolbar: emoji on the left, submit pill on the right. */
+.redditBox-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-1);
+  padding-top: 0.5rem;
+}
+.redditBox-submit {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1.2rem;
+  font-weight: 800;
+  background: var(--blue);
+  color: #fff;
+}
+.redditBox-submit:disabled {
+  background: var(--surface-2);
+  color: var(--text-2);
+  cursor: default;
+}

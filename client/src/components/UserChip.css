@@ -1,0 +1,36 @@
+.userChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.userChip-link {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 999px;
+}
+.userChip-link:hover .userChip-name {
+  text-decoration: underline;
+}
+
+.userChip-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #07121f;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.userChip-avatar--img {
+  object-fit: cover;
+}
+
+.userChip-name {
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,33 @@
+{
+  "name": "@gamenite/server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "check": "tsc",
+    "lint": "eslint .",
+    "prettier": "prettier --ignore-path ../.gitignore --check . ",
+    "prettier:fix": "prettier --ignore-path ../.gitignore --write .",
+    "test": "vitest run --coverage",
+    "dev": "node --watch ./src/server.ts",
+    "start": "MODE=production node ./src/server.ts"
+  },
+  "dependencies": {
+    "@gamenite/shared": "^1.0.0",
+    "@supabase/supabase-js": "^2.106.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.11",
+    "socket.io": "^4.8.3",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.1",
+    "@types/nodemailer": "^8.0.1",
+    "@types/supertest": "^7.2.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "socket.io-client": "^4.8.3",
+    "supertest": "^7.2.2",
+    "vitest": "^4.0.18"
+  }
+}

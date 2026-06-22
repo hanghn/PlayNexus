@@ -1,0 +1,9 @@
+/* Chat column — separated from the play area by a divider and a slightly
+   deeper background so it reads as its own panel. */
+div.chatContainer {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  height: var(--content-vh);
+  border-left: 1px solid #243450;
+  background: rgba(8, 14, 28, 0.4);
+}

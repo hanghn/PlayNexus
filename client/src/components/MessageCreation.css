@@ -1,0 +1,122 @@
+/* iMessage-style composer: emoji button, a rounded pill input, and a circular
+   send button that activates once there's text. */
+form.messageCreation {
+  border-top: 1px solid #243450;
+  padding: 0.6rem 0.75rem;
+}
+
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+/* Rounded pill text field. */
+.composer-input {
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  resize: none;
+  padding: 0.55rem 0.95rem;
+  background-color: #16233c;
+  color: #e8edf5;
+  border: 1px solid #34507e;
+  border-radius: 1.25rem;
+  min-height: 2.4rem;
+  max-height: 8rem;
+  line-height: 1.3;
+}
+
+.composer-input::placeholder {
+  color: #7286a6;
+}
+
+.composer-input:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 2px rgba(124, 196, 180, 0.25);
+}
+
+/* Circular send button (Apple-style up arrow). */
+.composer-send {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: none;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  transition:
+    background 0.12s ease,
+    transform 0.1s ease,
+    opacity 0.12s ease;
+}
+
+.composer-send:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.composer-send:disabled {
+  background: #2c3e60;
+  color: #6d80a4;
+  cursor: default;
+}
+
+/* Nudge the emoji button to sit centered with the pill. */
+.composer .emojiPicker {
+  align-self: center;
+}
+
+/* "Replying to …" chip shown above the input when composing a reply. */
+.composer-reply {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.45rem;
+  padding: 0.4rem 0.6rem;
+  background: #16233c;
+  border-radius: 0.6rem;
+}
+.composer-reply-bar {
+  flex-shrink: 0;
+  width: 3px;
+  align-self: stretch;
+  border-radius: 999px;
+  background: var(--blue);
+}
+.composer-reply-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+.composer-reply-to {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--blue-soft);
+}
+.composer-reply-snippet {
+  font-size: 0.82rem;
+  color: #c2cfe6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.composer-reply-cancel {
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  color: #8ea0c0;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.composer-reply-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}

@@ -1,0 +1,99 @@
+/* Nim — dark, on-brand layout (solid surfaces, no gradients) */
+.nim {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.4rem 1.6rem;
+  color: var(--text-1);
+  max-width: 42rem;
+}
+
+.nim-hero {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.nim-hero-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.nim-sub {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.98rem;
+}
+.nim-sub strong {
+  color: var(--text-1);
+}
+
+/* Pile panel */
+.nim-pile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.3rem;
+  border-radius: 0.9rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+}
+.nim-pile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  min-height: 2.5rem;
+  align-items: center;
+}
+.nim-token {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 2px solid #0c2b23;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+.nim-empty {
+  color: var(--text-2);
+  font-style: italic;
+}
+.nim-count {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--cream);
+}
+.nim-turn {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blue-soft);
+}
+
+/* Take buttons */
+.nim-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.nim-take {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nim-take:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.nim-take kbd {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0.3rem;
+  padding: 0 0.35rem;
+  font-size: 0.8rem;
+}
+.nim-tip {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.8rem;
+}

@@ -1,0 +1,166 @@
+div.chatWindow {
+  overflow-x: clip;
+  overflow-y: scroll;
+  /* allow the chat to shrink below its content width in any flex/grid layout,
+     so a long message can never stretch the page sideways */
+  min-width: 0;
+}
+
+div.chatScroller {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* extra top padding gives the floating hover toolbar headroom so it isn't
+     clipped above the first message */
+  padding: 1.6rem 1rem 1rem;
+  min-width: 0;
+}
+
+/* System / meta lines (joins, etc.) centered and muted */
+div.chatScroller .chatMeta {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #8194b3;
+}
+
+div.chatScroller .chatSender {
+  font-size: 0.75rem;
+  color: #8194b3;
+}
+
+div.chatScroller .chatMe .chatSender {
+  font-size: 0.75rem;
+  color: #8194b3;
+  text-align: right;
+}
+
+/* Incoming messages: dark slate bubble on the left */
+div.chatScroller .chatContent {
+  width: 75%;
+  max-width: max-content;
+  margin-right: auto;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  border-radius: 0.75rem;
+  border-top-left-radius: 0.2rem;
+  /* lighter blue-slate so the incoming bubble stands clearly apart from the dark
+     pane (better contrast) while keeping crisp white text */
+  background-color: #3a5b8f;
+  color: #ffffff;
+  /* break long unbroken strings so a bubble can't stretch the page sideways */
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* Your messages: teal bubble on the right */
+div.chatScroller .chatMe .chatContent {
+  margin-right: 0;
+  margin-left: auto;
+  border-radius: 0.75rem;
+  border-top-right-radius: 0.2rem;
+  background-color: var(--teal);
+  color: #07241d;
+}
+
+/* Per-message actions (read aloud / reply): a small floating toolbar that
+   appears on hover, tucked at the top corner of the bubble (Discord/Slack
+   style). Hidden at rest so messages stay clean. */
+div.chatScroller .chatContent {
+  position: relative;
+}
+.chatActions {
+  position: absolute;
+  top: -0.85rem;
+  z-index: 2;
+  display: inline-flex;
+  gap: 0.1rem;
+  padding: 0.18rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.25rem);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease;
+}
+/* Anchor the toolbar at each bubble's INNER corner so it extends toward the
+   center and is never clipped off the window edge (incoming → top-left, own →
+   top-right). */
+.chatOther .chatContent .chatActions {
+  left: 0.25rem;
+}
+.chatMe .chatContent .chatActions {
+  right: 0.25rem;
+}
+/* Reveal while hovering the whole row, so the toolbar stays put long enough
+   to actually click it. */
+.chatMe:hover .chatActions,
+.chatOther:hover .chatActions,
+.chatActions:focus-within {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.chatAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: none;
+  background: transparent;
+  color: var(--text-1);
+  border-radius: 50%;
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: background 0.1s ease;
+}
+.chatAction:hover {
+  background: var(--blue);
+  color: #fff;
+}
+.chatAction--danger:hover {
+  background: var(--coral);
+}
+
+/* Quoted message shown above a reply's text (iMessage-style).
+   Its own dark panel with light text + a bright accent bar, so it stays high
+   contrast and clearly distinct regardless of the bubble color underneath. */
+.chatQuote {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  margin-bottom: 0.4rem;
+  padding: 0.35rem 0.55rem;
+  border-left: 4px solid var(--blue-soft);
+  border-radius: 0.45rem;
+  background: #0d1a30;
+  color: #eaf0fb;
+  max-width: 100%;
+}
+.chatQuote-sender {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--blue-soft);
+}
+.chatQuote-snippet {
+  font-size: 0.82rem;
+  color: #eaf0fb;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* High contrast: pure black quote panel, white text, bright yellow bar. */
+[data-contrast="high"] .chatQuote {
+  background: #000000;
+  border-left-color: #ffd166;
+  color: #ffffff;
+}
+[data-contrast="high"] .chatQuote-sender,
+[data-contrast="high"] .chatQuote-snippet {
+  color: #ffffff;
+}
