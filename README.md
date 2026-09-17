@@ -1,7 +1,7 @@
 # PlayNexus
 
 A team project built by **Liam Foley**, **Hansen Cao**, **Silu Wang**, and
-**Hang Hang**. 
+**Hang Hang**.
 
 ## Getting Started
 
