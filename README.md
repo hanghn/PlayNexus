@@ -1,6 +1,6 @@
 # PlayNexus
 
-A team project built by **Liam Foley**, **Hansen Cao**, **Silu Wang**, and
+A real-time social gaming platform built by **Liam Foley**, **Hansen Cao**, **Silu Wang**, and
 **Hang Hang**.
 
 ## Getting Started
