@@ -51,6 +51,28 @@ production build of the client. Then, the server can be started in production
 mode by running `npm start -w=server` and accessed by going to
 <http://localhost:8000/>.
 
+### Deploying to Render
+
+`render.yaml` in the repository root describes a single Render web service
+that builds the client and serves it from Express. To deploy, point Render at
+this repository and use the Blueprint, or create a Web Service by hand with:
+
+- **Build Command** — `npm ci --include=dev && npm run build`
+- **Start Command** — `npm start`
+- **Environment variable** — `NODE_VERSION` set to `24`
+
+Two details matter here. `--include=dev` is required because `vite` and
+`typescript` are devDependencies and Render sets `NODE_ENV=production`, which
+would otherwise skip them and fail the build. `NODE_VERSION` must be 24 or
+newer because the server runs TypeScript directly and relies on Node's native
+type stripping.
+
+Leave the Supabase variables unset. Without them the server uses its in-memory
+store, reseeds the `user0`-`user3` demo accounts on every boot, and runs with
+no external services at all. Note that on Render's free tier the service
+sleeps after a period of inactivity, so the first request after an idle period
+can take roughly a minute while it wakes up.
+
 ## Codebase Folder Structure
 
 - `client`: Contains the frontend application code, responsible for the user

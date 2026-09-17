@@ -1,0 +1,30 @@
+# Render Blueprint for the PlayNexus demo deployment.
+#
+# This deploys the whole app as a single web service. Under MODE=production the
+# Express server serves the built React client, so the frontend, the REST API,
+# and the Socket.io connection all share one origin and no CORS or base-URL
+# configuration is needed.
+#
+# The service name below sets the *.onrender.com subdomain, and Render fixes
+# that subdomain at creation time -- renaming the service later will not change
+# the URL. Names are global across Render, so pick one that is still free.
+services:
+  - type: web
+    name: playnexus-demo
+    runtime: node
+    plan: free
+    branch: main
+    # vite and typescript live in devDependencies, and Render sets
+    # NODE_ENV=production, which makes a bare `npm ci` skip them. Without
+    # --include=dev the build fails with "vite: not found".
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      # server.ts is executed as TypeScript directly, which relies on Node's
+      # native type stripping. This matches the version used in CI.
+      - key: NODE_VERSION
+        value: "24"
+      # SUPABASE_URL is deliberately absent. Leaving it unset selects the
+      # in-memory store, which reseeds the user0-user3 demo accounts on every
+      # boot and keeps the demo runnable with no external services.
