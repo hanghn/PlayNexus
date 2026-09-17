@@ -1,7 +1,7 @@
 # PlayNexus
 
-A real-time social gaming platform built by **Liam Foley**, **Hansen Cao**, **Silu Wang**, and
-**Hang Hang**.
+A real-time social gaming platform built by **Liam Foley**, **Hansen Cao**,
+**Silu Wang**, and **Hang Hang**.
 
 ## Getting Started
 
